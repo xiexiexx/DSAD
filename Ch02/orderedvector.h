@@ -1,8 +1,7 @@
+#include <vector>
+
 #ifndef xORDEREDVECTOR_H
 #define xORDEREDVECTOR_H
-
-#include <vector>
-using std::vector;
 
 template <typename T>
 class S1 {
@@ -24,15 +23,15 @@ public:
 	// 返回集合中元素的个数.
 	int size() const;
 private:
-	vector<T> data;
+	std::vector<T> data;
 	int count;					// 实有数据个数
 };
 
 template <typename T>
 S1<T>::S1()
-	: count(0), data(1024)
+	: data(1024), count(0)
 {
-	// 为其设置较大容量, 初始向量长度定为1024, 元素个数定为0
+	// 为其设置较大容量, 初始向量长度定为1024, 元素个数定为0.
 }
 
 template <typename T>
@@ -41,6 +40,7 @@ void S1<T>::insert(const T& key)
 	int i = 0;
 	// 利用类似线性查找的方法先找出合适的插入位置pos.
 	// 若找不到合适的位置则意味应插入末尾, 因此注意pos的初值.
+	// 更好的方案是基于二分查找快速找到pos.
 	int pos = count;
 	while (i < count)
 	{
@@ -53,10 +53,20 @@ void S1<T>::insert(const T& key)
 			i++;
 	}
 	if (count == data.size())
+	{
+		// 防止key为data中的元素, 提前保存副本.
+		T key_copy = key;
 		data.resize( 2 * data.size() );
-	for (i = count; i > pos; i--)
-		data[i] = data[i - 1];
-	data[pos] = key;
+		for (i = count; i > pos; i--)
+			data[i] = data[i - 1];
+		data[pos] = key_copy;
+	}
+	else
+	{
+		for (i = count; i > pos; i--)
+			data[i] = data[i - 1];
+		data[pos] = key;
+	}
 	count++;
 }
 
@@ -72,7 +82,6 @@ void S1<T>::erase(int pos)
 template <typename T>
 int S1<T>::search(const T& key) const
 {
-	int pos = count;
 	int low = 0;
 	int high = count - 1;
 	while (low <= high)
@@ -83,9 +92,9 @@ int S1<T>::search(const T& key) const
 		else if (data[mid] < key)
 			low = mid + 1;
 		else
-			return mid;
+			return mid;		// 找到
 	}
-	return pos;
+	return count;			// 未找到
 }
 
 template <typename T>
@@ -95,6 +104,7 @@ int S1<T>::maximum_at() const
 	// 循环是(count - 1 + count + 1) % (count + 1),
 	// 如此可保证集合为空时所返回的位置信息.
 	return (count + count) % (count + 1);
+	// 或采用 return count > 0 ? count - 1 : 0;
 }
 
 template <typename T>

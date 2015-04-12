@@ -1,15 +1,16 @@
+// °üº¬std::swap
+#include <utility>
+
 #ifndef xVECTOR_H
 #define xVECTOR_H
-
-// åŒ…å«std::swap
-#include <utility>
 
 template <typename T>
 class xVector {
 public:
-	xVector(size_t size = 0, const T& initVal = T());
+	explicit xVector(size_t size = 0, const T& initVal = T());
 	xVector(const xVector<T>& obj);
 	~xVector();
+	void swap(xVector<T>& rhs);
 	xVector& operator= (const xVector<T>& rhs);
 	T& front();
 	const T& front() const;
@@ -28,154 +29,170 @@ private:
 	size_t vSize;		
 	T* V;
 	void vAllocate(size_t n);
-	// æœ‰æ—¶éœ€è¦åœ¨åˆå§‹ç»™å‘é‡ä¸€ä¸ªéé›¶å®¹é‡, æ­¤å¤„å–16
+	// ÓĞÊ±ĞèÒªÔÚ³õÊ¼¸øÏòÁ¿Ò»¸ö·ÇÁãÈİÁ¿, ´Ë´¦È¡16
 	static const size_t positive_capacity = 16;
 };
 
-// ç”³è¯·æ–°ç©ºé—´å¹¶è°ƒæ•´å®¹é‡
+// ÉêÇëĞÂ¿Õ¼ä²¢µ÷ÕûÈİÁ¿
 template <typename T>
 void xVector<T>::vAllocate(size_t n)
 {
-	V = new T[n];		// è®©Vè·å¾—æ–°ç”³è¯·å†…å­˜ç©ºé—´
+	V = new T[n];		// ÈÃV»ñµÃĞÂÉêÇëÄÚ´æ¿Õ¼ä
 	vCapacity = n;
 }
 
-// ä¸ºæ»¡è¶³æ›´å¤§çš„éœ€æ±‚è°ƒæ•´å‘é‡å¤§å°, ä½†åˆå­¦è€…ä¸å»ºè®®ä½¿ç”¨
+// ÎªÂú×ã¸ü´óµÄĞèÇóµ÷ÕûÏòÁ¿´óĞ¡, µ«³õÑ§Õß²»½¨ÒéÊ¹ÓÃ.
 template <typename T>
 void xVector<T>::reserve(size_t n)
 {
-	// nå¤§äºç°æœ‰çš„vCapacity
-	T* Vx = new T[n];	// æ–°ç”³è¯·å†…å­˜ç©ºé—´
-	for(size_t i = 0; i < vSize; i++)
-		Vx[i] = V[i];
-	delete[] V;			// é‡Šæ”¾åŸæœ‰ç©ºé—´
-	V = Vx;				// è®©Vè·å¾—VxæŒ‡å‘çš„ç©ºé—´
-	vCapacity = n;
+	// n´óÓÚÏÖÓĞµÄvCapacity²ÅÉúĞ§
+	if (n > vCapacity)
+	{
+		T* Vx = new T[n];	// ĞÂÉêÇëÄÚ´æ¿Õ¼ä
+		for(size_t i = 0; i < vSize; i++)
+			Vx[i] = V[i];
+		delete[] V;			// ÊÍ·ÅÔ­ÓĞ¿Õ¼ä
+		V = Vx;				// ÈÃV»ñµÃVxÖ¸ÏòµÄ¿Õ¼ä
+		vCapacity = n;
+	}
 }
 
-// æ„é€ å‡½æ•°çš„å®ç°
+// ¹¹Ôìº¯ÊıµÄÊµÏÖ
 template <typename T>
 xVector<T>::xVector(size_t size, const T& initVal)
 	: vSize(0), V(NULL)
 {
-	// æ„é€ å‡½æ•°åªéœ€è¦åšä¸€æ¬¡, å› æ­¤è¿™ç§åˆ¤æ–­æ— å…³ä¹æ€§èƒ½, è¿˜å¯ä»¥é˜²æ­¢sizeä¸ºè´Ÿæ•°
+	// ¹¹Ôìº¯ÊıÖ»ĞèÒª×öÒ»´Î, Òò´ËÕâÖÖÅĞ¶ÏÎŞ¹ØºõĞÔÄÜ. ´ËÍâ, ×¢Òâsize²»»áÎª¸º.
 	if (size > 0)
 	{
 		vAllocate(2 * size);
 		vSize = size;
-		// ä»¥æ„é€ å‡½æ•°çš„åˆå€¼å‚æ•°initValå¯¹å‘é‡ä¸­æ‰€æœ‰å…ƒç´ èµ‹å€¼
+		// ÒÔ¹¹Ôìº¯ÊıµÄ³õÖµ²ÎÊıinitVal¶ÔÏòÁ¿ÖĞËùÓĞÔªËØ¸³Öµ
 		for (size_t i = 0; i < vSize; i++)
 			V[i] = initVal;
 	}
-	else	// ä¸ºåç»­åŠ å€æ–¹ä¾¿, åˆå§‹ç»™å‘é‡ä¸€ä¸ªéé›¶å®¹é‡
+	else	// ÎªºóĞø¼Ó±¶·½±ã, ³õÊ¼¸øÏòÁ¿Ò»¸ö·ÇÁãÈİÁ¿
 		vAllocate(positive_capacity);
 }
 
-// å¤åˆ¶æ„é€ å‡½æ•°çš„å®ç°
+// ¸´ÖÆ¹¹Ôìº¯ÊıµÄÊµÏÖ
 template <typename T>
 xVector<T>::xVector(const xVector<T>& obj)
 	: vSize(obj.vSize)
 {
-	vAllocate(obj.vCapacity);	// æŒ‰ç…§objçš„å®¹é‡ç”³è¯·æ–°å†…å­˜ç©ºé—´
+	vAllocate(obj.vCapacity);	// °´ÕÕobjµÄÈİÁ¿ÉêÇëĞÂÄÚ´æ¿Õ¼ä
 	for (size_t i = 0; i < vSize; i++)
-		V[i] = obj.V[i];		// é€ä¸ªå¤åˆ¶
+		V[i] = obj.V[i];		// Öğ¸ö¸´ÖÆ
 }
 
-// ææ„å‡½æ•°çš„å®ç°
+// Îö¹¹º¯ÊıµÄÊµÏÖ
 template <typename T>
 xVector<T>::~xVector()
 {
 	delete[] V;
 }
 
-// è¿ç®—ç¬¦=çš„é‡è½½å®ç°
+// Êı¾İ½»»»º¯Êı
+template <typename T>
+void xVector<T>::swap(xVector<T>& rhs)
+{
+	std::swap(this->V, rhs.V);
+	std::swap(this->vCapacity, rhs.vCapacity);
+	std::swap(this->vSize, rhs.vSize);
+}
+
+// ÔËËã·û=µÄÖØÔØÊµÏÖ
 template <typename T>
 xVector<T>& xVector<T>::operator=(const xVector<T>& rhs)
 {
-	// æƒ¯ç”¨æ³•: copy and swap
+	// ¹ßÓÃ·¨: copy and swap
 	xVector<T> temp(rhs);
-	// äº¤æ¢thiså’Œtempçš„æ•°æ®éƒ¨åˆ†
-	std::swap(this->V, temp.V);
-	std::swap(this->vCapacity, temp.vCapacity);
-	std::swap(this->vSize, temp.vSize);
+	// ½»»»thisºÍtempµÄÊı¾İ²¿·Ö
+	swap(temp);
 	return *this;
 }
 
-// è¿”å›å‘é‡é¦–éƒ¨
+// ·µ»ØÏòÁ¿Ê×²¿
 template <typename T>
 T& xVector<T>::front()
 {
 	return V[0];
 }
 
-// è¿”å›å‘é‡é¦–éƒ¨çš„å¸¸é‡ç‰ˆæœ¬
+// ·µ»ØÏòÁ¿Ê×²¿µÄ³£Á¿°æ±¾
 template <typename T>
 const T& xVector<T>::front() const
 {
 	return V[0];
 }
 
-// è¿”å›å‘é‡æœ«å°¾
+// ·µ»ØÏòÁ¿Ä©Î²
 template <typename T>
 T& xVector<T>::back()
 {
 	return V[vSize - 1];
 }
 
-// è¿”å›å‘é‡æœ«å°¾çš„å¸¸é‡ç‰ˆæœ¬
+// ·µ»ØÏòÁ¿Ä©Î²µÄ³£Á¿°æ±¾
 template <typename T>
 const T& xVector<T>::back() const
 {
 	return V[vSize - 1];
 }
 
-// è¿ç®—ç¬¦[]çš„é‡è½½å®ç°
+// ÔËËã·û[]µÄÖØÔØÊµÏÖ
 template <typename T>
 T& xVector<T>::operator[] (size_t i)
 {
 	return V[i];
 }
 
-// è¿ç®—ç¬¦[]çš„é‡è½½å®ç°çš„å¸¸é‡ç‰ˆæœ¬
+// ÔËËã·û[]µÄÖØÔØÊµÏÖµÄ³£Á¿°æ±¾
 template <typename T>
 const T& xVector<T>::operator[] (size_t i) const
 {
 	return V[i];
 }
 
-// åœ¨å‘é‡æœ«å°¾æ·»åŠ æ–°å…ƒç´ 
+// ÔÚÏòÁ¿Ä©Î²Ìí¼ÓĞÂÔªËØ
 template <typename T>
 void xVector<T>::push_back(const T& item)
 {
-	// å®¹é‡ä¸å¤Ÿç”¨, æ‰©å®¹è‡³ç°æœ‰å®¹é‡çš„ä¸¤å€
+	// Èç¹ûÈİÁ¿²»¹»ÓÃ, ÔòÀ©ÈİÖÁÏÖÓĞÈİÁ¿µÄÁ½±¶.
 	if (vSize == vCapacity)
+	{
+		// ·ÀÖ¹itemÎªVÖĞµÄÔªËØ, ÌáÇ°±£´æ¸±±¾.
+		T item_copy = item;
 		reserve(2 * vCapacity);
-	V[vSize] = item;
+		V[vSize] = item_copy;
+	}
+	else
+		V[vSize] = item;
 	vSize++;
 }
 
-// å»é™¤å‘é‡çš„æœ«å°¾å…ƒç´ 
+// È¥³ıÏòÁ¿µÄÄ©Î²ÔªËØ
 template <typename T>
 void xVector<T>::pop_back()
 {
 	vSize--;
 }
 
-// è¿”å›å‘é‡çš„å¤§å°
+// ·µ»ØÏòÁ¿µÄ´óĞ¡
 template <typename T>
 size_t xVector<T>::size() const
 {
 	return vSize;
 }
 
-// åˆ¤æ–­å‘é‡æ˜¯å¦ä¸ºç©º
+// ÅĞ¶ÏÏòÁ¿ÊÇ·ñÎª¿Õ
 template <typename T>
 bool xVector<T>::empty() const
 {
 	return (vSize == 0);
 }
 
-// è¿”å›å‘é‡çš„å½“å‰å®¹é‡
+// ·µ»ØÏòÁ¿µÄµ±Ç°ÈİÁ¿
 template <typename T>
 size_t xVector<T>::capacity() const
 {
