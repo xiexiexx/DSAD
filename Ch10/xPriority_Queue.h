@@ -53,10 +53,10 @@ void xPriority_Queue<T, Sequence>::pop()
 {
 	// 前提是优先级队列非空, 于是c[1]必有元素.
 	c[1] = c[ c.size() - 1 ];
-	// 调整c的大小.
-	c.pop_back();
-	// 在1位置执行下沉操作.
+	// 在1位置执行下沉操作, 注意此时c中最后一个元素无效.
 	sink(1);
+	// 下沉完毕再来调整c的大小, 如果提前调整可能c[1]会不存在.
+	c.pop_back();
 }
 
 // 返回优先级队列的大小.
@@ -81,9 +81,9 @@ void xPriority_Queue<T, Sequence>::swim(size_t i)
 {
 	// 在c[0]处设置哨兵以终止循环, 并保存初始结点i处的数据.
 	c[0] = c[i];
-	// 如果c[i]大于父亲结点c[i / 2]则不断上浮,
-	// 但初始结点处的数据暂不处理, 其值存于c[0].
-	while (c[i / 2] < c[i])
+	// 如果c[0]大于i位置的父亲结点值c[i / 2]则不断让i位置上浮,
+	// 但初始结点处的数据暂不处理, 其值仍存于c[0].
+	while (c[i / 2] < c[0])
 	{
 		c[i] = c[i / 2];
 		i = i / 2;
@@ -96,14 +96,17 @@ void xPriority_Queue<T, Sequence>::swim(size_t i)
 template <typename T, typename Sequence>
 void xPriority_Queue<T, Sequence>::sink(size_t i)
 {
-	// 暂存c[i]数据.
+	// 当前c中最后一个元素已无效, 真实长度为c.size() - 1.
+	size_t c_size = c.size() - 1;
+	// 暂存c[i]数据, 注意后续操作是和c[0]比较.
 	c[0] = c[i];
 	// 结点的右孩子编号.
 	size_t rChildNo = 2 * i + 1;
 	// 右孩子存在(即左右孩子均存在)时的下沉.
-	while (rChildNo < c.size())
+	while (rChildNo < c_size)
 	{
-		size_t MAX = i;
+		// MAX为较大结点的编号, 注意其初值为0.
+		size_t MAX = 0;
 		// 右孩子较大则MAX换为右孩子编号.
 		if (c[MAX] < c[rChildNo])
 			MAX = rChildNo;
@@ -111,7 +114,7 @@ void xPriority_Queue<T, Sequence>::sink(size_t i)
 		if (c[MAX] < c[rChildNo - 1])
 			MAX = rChildNo - 1;
 		// 断言: 不需要交换则下沉结束.
-		if (MAX == i)
+		if (MAX == 0)
 			break;
 		// 需要交换时先将较大的孩子存于i位置.
 		c[i] = c[MAX];
@@ -119,17 +122,13 @@ void xPriority_Queue<T, Sequence>::sink(size_t i)
 		i = MAX;
 		rChildNo = 2 * i + 1;
 	}
-	// 处理特殊情况.
-	if (rChildNo == c.size())
+	// 处理特殊情况: 最后仅存在左孩子且需要继续下沉.
+	if (rChildNo == c_size && c[0] < c[rChildNo - 1])
 	{
-		// 最后仅存在左孩子.
-		if (c[i] < c[rChildNo - 1])
-		{
-			// 需要交换时先将左孩子存于i位置.
-			c[i] = c[rChildNo - 1];
-			// 获得最终停留位置.
-			i = rChildNo - 1;
-		}
+		// 需要交换时先将左孩子存于i位置.
+		c[i] = c[rChildNo - 1];
+		// 获得最终停留位置.
+		i = rChildNo - 1;
 	}
 	// 将初始结点处的数据存于下沉操作最终停留的位置.
 	c[i] = c[0];
