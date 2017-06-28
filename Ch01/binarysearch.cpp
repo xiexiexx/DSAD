@@ -1,8 +1,8 @@
 template <typename T>
 void BinarySearch(const T& key, const T data[], int N, bool& found, int& pos)
 {
-	// ÊäÈë: key - ´ı²éÔªËØ; data - ÓĞĞòÊı¾İ¼¯(´ÓĞ¡µ½´óÅÅÁĞ); N - Êı¾İ¼¯³¤¶È.
-	// Êä³ö: found - ±ê¼ÇkeyÊÇ·ñÕÒµ½; pos - ËùÕÒµ½µÄÎ»ÖÃ.
+	// è¾“å…¥: key - å¾…æŸ¥å…ƒç´ ; data - æœ‰åºæ•°æ®é›†(ä»å°åˆ°å¤§æ’åˆ—); N - æ•°æ®é›†é•¿åº¦.
+	// è¾“å‡º: found - æ ‡è®°keyæ˜¯å¦æ‰¾åˆ°; pos - æ‰€æ‰¾åˆ°çš„ä½ç½®.
 	found = false;
 	pos = N;
 	int low = 0;
@@ -10,15 +10,15 @@ void BinarySearch(const T& key, const T data[], int N, bool& found, int& pos)
 	while (low <= high)
 	{
 		int mid = low + (high - low) / 2;
-		if (key < data[mid])		// Ğ¡ÔòÈ¥Ç°°ë²¿·Ö¼ÌĞø²éÕÒ
+		if (key < data[mid])		// å°åˆ™å»å‰åŠéƒ¨åˆ†ç»§ç»­æŸ¥æ‰¾
 			high = mid - 1;
-		else if (data[mid] < key)	// ´óÔòÈ¥ºó°ë²¿·Ö¼ÌĞø²éÕÒ
+		else if (data[mid] < key)	// å¤§åˆ™å»ååŠéƒ¨åˆ†ç»§ç»­æŸ¥æ‰¾
 			low = mid + 1;
 		else
 		{
 			pos = mid;
 			found = true;
-			break;					// ÕÒµ½ÔòÌø³öÑ­»·
+			break;					// æ‰¾åˆ°åˆ™è·³å‡ºå¾ªç¯
 		}
 	}
-}
+} 
