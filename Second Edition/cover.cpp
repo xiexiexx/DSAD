@@ -5,9 +5,10 @@ using namespace std;
 
 int main()
 {
-  string D = "Algorithm Design";
-  make_heap(D.begin(), D.end());
-  sort_heap(D.begin(), D.end());
-  D.erase(unique(D.begin(), D.end()), D.end());
+  string S = "Algorithm Design";
+  make_heap(S.begin(), S.end());
+  sort_heap(S.begin(), S.end());
+  auto D = unique(S.begin(), S.end());
+  cout << S.erase(D, S.end()) - S.begin();
   return 0;
 }
