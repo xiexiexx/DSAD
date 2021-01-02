@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-  string D = "algorithm design";
+  string D = "Algorithm Design";
   make_heap(D.begin(), D.end());
   sort_heap(D.begin(), D.end());
   D.erase(unique(D.begin(), D.end()), D.end());
