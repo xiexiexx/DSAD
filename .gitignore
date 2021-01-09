@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+# ignore vscode config
+.vscode/
+.DS_Store
