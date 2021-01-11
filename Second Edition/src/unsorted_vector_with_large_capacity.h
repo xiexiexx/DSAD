@@ -1,13 +1,13 @@
 #include <vector>
 
-#ifndef xUNORDEREDVECTOR_H
-#define xUNORDEREDVECTOR_H
+#ifndef xUNSORTEDVECTOR_H
+#define xUNSORTEDVECTOR_H
 
 template <typename T>
-class unordered_vector_with_large_capacity {
+class unsorted_vector_with_large_capacity {
 public:
   // 构造函数.
-  unordered_vector_with_large_capacity();
+  unsorted_vector_with_large_capacity();
   // 将key放入集合中.
   void insert(const T& key);
   // 将pos位置所在的元素删除, 前提是pos在0到size() - 1之间.
@@ -27,15 +27,15 @@ private:
 };
 
 template <typename T>
-unordered_vector_with_large_capacity<T>
-  ::unordered_vector_with_large_capacity()
+unsorted_vector_with_large_capacity<T>
+  ::unsorted_vector_with_large_capacity()
 {
   // 为其设置较大容量, 初始向量长度定为3142, 元素个数定为0.
   data.reserve(3142);
 }
 
 template <typename T>
-void unordered_vector_with_large_capacity<T>::
+void unsorted_vector_with_large_capacity<T>::
   insert(const T& key)
 {
   // 在data末尾加入新元素key.
@@ -43,7 +43,7 @@ void unordered_vector_with_large_capacity<T>::
 }
 
 template <typename T>
-void unordered_vector_with_large_capacity<T>::
+void unsorted_vector_with_large_capacity<T>::
   erase(size_t pos)
 {
   // 注意执行erase的前提是size() > 0.
@@ -53,7 +53,7 @@ void unordered_vector_with_large_capacity<T>::
 }
 
 template <typename T>
-size_t unordered_vector_with_large_capacity<T>::
+size_t unsorted_vector_with_large_capacity<T>::
   find(const T& key) const
 {
   // 采用线性查找获取所在位置下标, 通过调用std::find函数实现.
@@ -61,7 +61,7 @@ size_t unordered_vector_with_large_capacity<T>::
 }
 
 template <typename T>
-size_t unordered_vector_with_large_capacity<T>::
+size_t unsorted_vector_with_large_capacity<T>::
   maximum_at() const
 {
   size_t max_pos = 0;
@@ -73,7 +73,7 @@ size_t unordered_vector_with_large_capacity<T>::
 }
 
 template <typename T>
-size_t unordered_vector_with_large_capacity<T>::
+size_t unsorted_vector_with_large_capacity<T>::
   minimum_at() const
 {
   size_t min_pos = 0;
@@ -85,17 +85,17 @@ size_t unordered_vector_with_large_capacity<T>::
 }
 
 template <typename T>
-const T& unordered_vector_with_large_capacity<T>::
+const T& unsorted_vector_with_large_capacity<T>::
   operator()(size_t pos) const
 {
   return data[pos];
 }
 
 template <typename T>
-size_t unordered_vector_with_large_capacity<T>::
+size_t unsorted_vector_with_large_capacity<T>::
   size() const
 {
   return data.size();
 }
 
-#endif  // xUNORDEREDVECTOR_H
+#endif  // xUNSORTEDVECTOR_H
