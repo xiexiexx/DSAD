@@ -57,7 +57,7 @@ size_t unsorted_vector_with_large_capacity<T>::
   find(const T& key) const
 {
   // 采用线性查找获取所在位置下标, 通过调用std::find函数实现.
-  return std::find(data.cbegin(), data.cend(), key) - data.cbegin();
+  return std::find(data.begin(), data.end(), key) - data.begin();
 }
 
 template <typename T>
