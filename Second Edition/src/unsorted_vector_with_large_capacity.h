@@ -26,6 +26,10 @@ private:
   std::vector<T> data;
 };
 
+// 简记为S2.
+template <typename T>
+using S2 = unsorted_vector_with_large_capacity<T>;
+
 template <typename T>
 unsorted_vector_with_large_capacity<T>::
   unsorted_vector_with_large_capacity()
