@@ -10,7 +10,7 @@ public:
   unsorted_vector_with_large_capacity();
   // 将key放入集合中.
   void insert(const T& key);
-  // 将pos位置所在的元素删除, 前提是pos在0到size() - 1之间.
+  // 将pos位置所在的元素删除, 前提是集合非空且pos在0到size() - 1之间.
   void erase(size_t pos);
   // 若key在集合中则返回其位置, 否则返回size().
   size_t find(const T& key) const;
