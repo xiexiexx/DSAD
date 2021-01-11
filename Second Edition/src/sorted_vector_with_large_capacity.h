@@ -27,6 +27,10 @@ private:
   std::vector<T> data;
 };
 
+// 简记为S1.
+template <typename T>
+using S1 = sorted_vector_with_large_capacity<T>;
+
 template <typename T>
 sorted_vector_with_large_capacity<T>::
   sorted_vector_with_large_capacity()
