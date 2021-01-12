@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 using namespace std;
+
 int main()
 {
   const int d = 8;
