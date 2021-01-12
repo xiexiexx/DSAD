@@ -2,12 +2,10 @@
 #include <iostream>
 #include <iomanip>
 
-LEGO::LEGO(size_t n, point given_spot)
+LEGO::LEGO(size_t n)
   : baseplate(n, n), length(n)
 {
-  init_spot = {given_spot.x, given_spot.y};
-  // 初始已铺平瓦位置编号为0.
-  baseplate(init_spot.x, init_spot.y) = 0;
+  // 设定尺寸, 注意初始点到求解时再行设定.
 }
 
 void LEGO::DAC(size_t n, point start, point spot)
@@ -50,8 +48,10 @@ void LEGO::DAC(size_t n, point start, point spot)
   }
 }
 
-void LEGO::solve()
+void LEGO::solve(point init_spot)
 {
+  // 初始已铺平瓦位置编号为0.
+  baseplate(init_spot.x, init_spot.y) = 0;
   label = 1;
   DAC(length, {0, 0}, {init_spot.x, init_spot.y});
 }
@@ -64,4 +64,12 @@ void LEGO::print()
       std::cout << std::setw(5) << baseplate(i, j);
     std::cout << std::endl;
   }
+}
+
+int main()
+{
+  LEGO M(8);
+  M.solve({5, 2});
+  M.print();
+  return 0;
 }
