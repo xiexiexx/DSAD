@@ -14,7 +14,7 @@ public:
   // 设定已铺平瓦的位置init_spot并求解.
   void solve(point init_spot);
   // 打印解法.
-  void print();
+  void print(size_t width);
 private:
   // n为所求解底板当前边长, start为该底板左上角位置,
   // spot为当前底板中已铺位置. 采用分治法DAC求解.

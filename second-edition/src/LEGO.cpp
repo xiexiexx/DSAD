@@ -56,20 +56,13 @@ void LEGO::solve(point init_spot)
   DAC(length, {0, 0}, {init_spot.x, init_spot.y});
 }
 
-void LEGO::print()
+void LEGO::print(size_t width)
 {
+  // 80字符终端打印可设width为5.
   for (size_t i = 0; i < length; i++)
   {
     for (size_t j = 0; j < length; j++)
-      std::cout << std::setw(5) << baseplate(i, j);
+      std::cout << std::setw(width) << baseplate(i, j);
     std::cout << std::endl;
   }
-}
-
-int main()
-{
-  LEGO M(8);
-  M.solve({5, 2});
-  M.print();
-  return 0;
 }
