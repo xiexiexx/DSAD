@@ -13,7 +13,6 @@ void LEGO::DAC(size_t n, point start, point spot)
   if (n > 1)
   {
     size_t half = n / 2;
-    size_t i, j;
     // spot_temp描述更小底板的已铺位置坐标.
     point spot_temp[2][2];
     // 先统一给出中心位置4个点的坐标, 也可用for语句实现(但稍慢).
@@ -56,7 +55,7 @@ void LEGO::solve(point init_spot)
   DAC(length, {0, 0}, {init_spot.x, init_spot.y});
 }
 
-void LEGO::print(size_t width)
+void LEGO::print(int width)
 {
   // 80字符终端打印可设width为5.
   for (size_t i = 0; i < length; i++)
