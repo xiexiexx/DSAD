@@ -1,7 +1,7 @@
 #ifndef TIMER_CLASS
 #define TIMER_CLASS
 
-#include <ctime>
+#include <chrono>
 
 class timer {
 public:
