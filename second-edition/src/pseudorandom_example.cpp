@@ -5,7 +5,7 @@ const int M = 2147483647;
 const int Q = M / A;
 const int R = M % A;
 
-// 将X更改为伪随机整数序列的下一个数, 输出范围是(0, M).
+// 将X更改为伪随机整数序列的下一个数, 其范围仍保持(0, M).
 void random(int& X)
 {
   X = A * (X % Q) - R * (X / Q);
