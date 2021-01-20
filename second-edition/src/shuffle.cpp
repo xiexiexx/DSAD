@@ -7,7 +7,7 @@
 // 注意还有shuffle_order_engine, 例如knuth_b.
 
 template <typename T>
-void shuffle(vector<T>& V)
+void shuffle(std::vector<T>& V)
 {
   // 随机种子为当前时间(已转换成size_t型), 基于均匀分布产生随机数,
   // 下界为0, 上界为默认的numeric_limits<size_t>::max().

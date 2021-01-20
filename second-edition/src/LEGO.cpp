@@ -57,7 +57,6 @@ void LEGO::solve(point init_spot)
 
 void LEGO::print(int width)
 {
-  // 80字符终端打印可设width为5.
   for (size_t i = 0; i < length; i++)
   {
     for (size_t j = 0; j < length; j++)
