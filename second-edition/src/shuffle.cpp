@@ -9,9 +9,11 @@
 template <typename T>
 void shuffle(std::vector<T>& V)
 {
-  // 随机种子为当前时间(已转换成size_t型), 基于均匀分布产生随机数,
+  // 随机种子为当前时间(已转换成unsigned int型), 也可用chrono的now函数.
+  // 基于均匀分布uniform_int_distribution产生随机数,
   // 下界为0, 上界为默认的numeric_limits<size_t>::max().
-  std::default_random_engine generator(time(NULL));
+  unsigned int seed = static_cast<unsigned int>(time(NULL));
+  std::default_random_engine generator(seed);
   std::uniform_int_distribution<size_t> distribution(0);
   // 从V.size() - 1到1, 每次作随机交换,
   // 不到0是因为那一次肯定无交换.
