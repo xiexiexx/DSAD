@@ -29,7 +29,7 @@ void permute(std::vector<T>& V, size_t k = 0)
 // 生成{1, 2, 3, 4, 5}的所有排列并在屏幕上输出.
 int main()
 {
-  std::vector<int> A = {1, 2, 3, 4, 5};
+  std::vector<int> A {1, 2, 3, 4, 5};
   timer t;
   t.start();
   // 默认从向量首元素A[0]开始.
