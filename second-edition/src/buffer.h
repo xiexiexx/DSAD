@@ -16,8 +16,8 @@ public:
   bool full() const;
   size_t capacity() const;
 private:
-  std::vector<T> C;
-  // 缓冲区容量实为C.size(), 单独设置是为了避免频繁调用.
+  std::vector<T> Q;
+  // 缓冲区容量实为Q.size(), 单独设置是为了避免频繁调用.
   size_t length;
   // 缓冲区元素个数.
   size_t count;
@@ -29,7 +29,7 @@ private:
 // 构造函数的实现.
 template <typename T>
 buffer<T>::buffer(size_t n)
-  : C(n), length(n), count(0), left(0), right(0)
+  : Q(n), length(n), count(0), left(0), right(0)
 {
 }
 
@@ -37,14 +37,14 @@ buffer<T>::buffer(size_t n)
 template <typename T>
 T& buffer<T>::front()
 {
-  return C[left];
+  return Q[left];
 }
 
 // 返回队首的常量版本.
 template <typename T>
 const T& buffer<T>::front() const
 {
-  return C[left];
+  return Q[left];
 }
 
 // 入队操作.
@@ -52,7 +52,7 @@ template <typename T>
 void buffer<T>::push(const T& item)
 {
   // 由用户判断是否缓冲区已满, 此处只实现入队.
-  C[right++] = item;
+  Q[right++] = item;
   if (right == length)
     right = 0;
   ++count;
