@@ -1,5 +1,5 @@
 #include <iostream>
-// 需要安装GMP库(https://gmplib.org). 
+// 需要安装GMP库(https://gmplib.org).
 #include "gmp.h"
 
 int main()
@@ -12,12 +12,13 @@ int main()
   // 初始化f.
   mpz_init(f);
   size_t n = 2021;
-  for (size_t i = 2; i <= n; ++i)
+  for (size_t i = 2; i < n; ++i)
   {
     mpz_add(f, m2, m1);
     mpz_set(m2, m1);
     mpz_set(m1, f);
   }
+  mpz_add(f, m2, m1);
   std::cout << "Fibonacci " << n << std::endl;
   gmp_printf("%Zd\n", f);
   // 释放所有整数变量的空间, 注意列表要以NULL结尾.
