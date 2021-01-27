@@ -6,15 +6,15 @@
 
 // Huffman树结点定义.
 struct hnode {
-  double weight;			// 权值.
-  size_t number;			// 编号.
+  double weight;      // 权值.
+  size_t number;      // 编号.
   // 设原始符号共n个,我们以编号区分原始符号结点和编码过程中出现的新结点,
   // 原始符号结点编号为0到n - 1, 新结点统一编号(大于n).
-  hnode* left;	      // 左孩子.
+  hnode* left;        // 左孩子.
   hnode* right;       // 右孩子.
 };
 
-// greater_hnode_pointer为hnode型指针定义的函数对象, 
+// greater_hnode_pointer为hnode型指针定义的函数对象,
 // 用于比较该型指针所指向对象之间的大于关系.
 class greater_hnode_pointer {
 public:
@@ -39,4 +39,4 @@ private:
   std::vector<std::string> HC;
 };
 
-# endif	// HUFFMAN_TREE
+# endif // HUFFMAN_TREE

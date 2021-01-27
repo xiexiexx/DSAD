@@ -31,8 +31,8 @@ void Huffman::coding(const vector<double>& P, vector<string>& C)
 {
   // 编码向量HC的长度设置为概率向量的长度.
   HC.resize(P.size());
-  // 存储Huffman树的最小优先级队列PQ, 优先级为树的权值, 
-  // 实际存储的是树的根结点指针. 
+  // 存储Huffman树的最小优先级队列PQ, 优先级为树的权值,
+  // 实际存储的是树的根结点指针.
   priority_queue<hnode*,
     vector<hnode*>, greater_hnode_pointer> PQ;
   // 一次性给出所有在编码中会出现的结点.
@@ -40,7 +40,7 @@ void Huffman::coding(const vector<double>& P, vector<string>& C)
   // index作为编号, 指示当前会使用data[index]处的结点.
   size_t index;		// 注意其作用域不仅限于下面的for循环.
   // 初始放入n个仅有根结点的树.
-  for (index = 0; index < P.size(); index++)
+  for (index = 0; index < P.size(); ++index)
   {
     // 对应需编码的符号, 编号为自然数.
     data[index].number = index;
@@ -73,7 +73,7 @@ void Huffman::coding(const vector<double>& P, vector<string>& C)
     // 编号更新, 下次使用新结点.
     ++index;
   }
-  // 若PQ不空则可根据起中所剩的唯一Huffman树进行编码.
+  // 若PQ不空则可根据其中所剩的唯一Huffman树进行编码.
   if (!PQ.empty())
   {
     tree_coding(PQ.top(), "");
