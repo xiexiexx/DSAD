@@ -16,11 +16,11 @@ void ChiaHsienTriangle(int n)
       // 以(n - i) * width为宽度打印前导空格.
       std::cout << std::string(width, ' ');
     int prev = 0;
-    // 在屏幕上输出当前行并生成下一行新元素.
+    // 打印当前行并生成下一行新元素.
     for(int j = 0; j < i + 1; j++)
     {
       // 每项及其后的空格均占width宽度.
-      std::cout << std::setw(width) << Q.front() 
+      std::cout << std::setw(width) << Q.front()
                 << std::string(width, ' ');
       // 当前元素Q.front()与前一个出队元素prev相加形成下一行新元素.
       Q.push( prev + Q.front() );

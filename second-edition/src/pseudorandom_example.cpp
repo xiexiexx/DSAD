@@ -13,16 +13,17 @@ void random(int& X)
     X += M;
 }
 
-// 在屏幕上输出42个[0,100)内的伪随机数, 初始种子值为202111.
+// 打印n个[0, m)内的伪随机数, 初始种子值为seed.
 int main()
 {
-  int seed = 202111;  // 取值区间为(0, M).
-  int n = 100;
-  for (int i = 0; i < 42; i++)
+  int seed = 314159;  // 取值限定为(0, M)范围内.
+  int n = 42;
+  int m = 73;
+  for (int i = 0; i < n; i++)
   {
     random(seed);
     double r = static_cast<double>(seed) / static_cast<double>(M);
-    std::cout << static_cast<int>(r * n) << ' ';
+    std::cout << static_cast<int>(r * m) << ' ';
   }
   return 0;
 }

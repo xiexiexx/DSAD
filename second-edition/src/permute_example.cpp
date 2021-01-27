@@ -26,7 +26,7 @@ void permute(std::vector<T>& V, size_t k = 0)
     }
 }
 
-// 生成{1, 2, 3, 4, 5}的所有排列并在屏幕上输出.
+// 生成{1, 2, 3, 4, 5}的所有排列并打印.
 int main()
 {
   std::vector<int> A {1, 2, 3, 4, 5};
