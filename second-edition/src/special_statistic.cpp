@@ -26,7 +26,7 @@ void input_preprocess(list<int>& L, int& m)
 void print(const list<int>& L)
 {
   // 由于此次遍历不改变链的状态, 所以使用常量迭代器citer.
-  // 常量迭代器可以保证对L的常量引用, 特别以cbegin和cend区别于begin和end.
+  // 常量迭代器可保证对L的常量引用, 特别以cbegin和cend区别于begin和end.
   // 此外要特别注意for语句中使用常量迭代器遍历的惯用法.
   // 也可使用基于范围的for循环完成.
   for (auto citer = L.cbegin(); citer != L.cend(); ++citer)
@@ -40,7 +40,8 @@ void mean_of_larger(list<int>& L, int d, int m)
   int threshold = m - d;
   // 满足要求的数之总和, 以double型存储便于后续计算.
   double sum = 0;
-  int n = 0;					// 满足要求的自然数个数.
+  // 满足要求的自然数个数.
+  int n = 0;
   // 使用auto定义迭代器iter, 注意可能利用它删除元素,
   // 因为删除会改变容器状态, 所以iter是list<int>::iterator型的迭代器.
   auto iter = L.begin();
@@ -50,10 +51,10 @@ void mean_of_larger(list<int>& L, int d, int m)
     {
       sum += *iter;
       n++;
-      ++iter;		// 迭代器向前.
+      ++iter;               // 迭代器向前.
     }
     else
-      iter = L.erase(iter);	// 删除后iter会被赋值到下一元素位置.
+      iter = L.erase(iter); // 删除后iter会被赋值到下一元素位置.
   }
   cout << "The mean of the larger numbers is " << sum / n << endl;
   cout << "Larger numbers: ";
