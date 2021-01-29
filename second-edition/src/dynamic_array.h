@@ -211,7 +211,7 @@ template <typename T>
 inline typename dynamic_array<T>::iterator
   dynamic_array<T>::begin()
 {
-	return V;
+  return V;
 }
 
 // 向量的初始位置cbegin(), 用于常量迭代器.
@@ -219,7 +219,7 @@ template <typename T>
 inline typename dynamic_array<T>::const_iterator
   dynamic_array<T>::cbegin() const
 {
-	return V;
+  return V;
 }
 
 // 向量的初始位置end(), 用于迭代器.
@@ -227,7 +227,7 @@ template <typename T>
 inline typename dynamic_array<T>::iterator
   dynamic_array<T>::end()
 {
-	return (V + array_size);
+  return (V + array_size);
 }
 
 // 向量的初始位置cend(), 用于常量迭代器.
@@ -235,7 +235,7 @@ template <typename T>
 inline typename dynamic_array<T>::const_iterator
   dynamic_array<T>::cend() const
 {
-	return (V + array_size);
+  return (V + array_size);
 }
 
 #endif  // DYNAMIC_ARRAY_H
