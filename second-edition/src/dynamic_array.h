@@ -78,7 +78,7 @@ dynamic_array<T>::dynamic_array(size_t size, const T& value)
     for (size_t i = 0; i < array_size; ++i)
       V[i] = value;
   }
-  else	// 为后续加倍方便, 初始给向量一个恒定正容量.
+  else  // 为后续加倍方便, 初始给向量一个恒定正容量.
     initialize(POSITIVE_CAPACITY);
 }
 

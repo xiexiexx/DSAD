@@ -1,7 +1,7 @@
 #include <vector>
 
-#ifndef xUNSORTEDVECTOR_H
-#define xUNSORTEDVECTOR_H
+#ifndef UNSORTEDVECTOR_H
+#define UNSORTEDVECTOR_H
 
 template <typename T>
 class unsorted_vector_with_large_capacity {
@@ -70,7 +70,7 @@ size_t unsorted_vector_with_large_capacity<T>::
 {
   size_t max_pos = 0;
   // for循环的设置可保证集合为空时返回正确值.
-  for (size_t i = 1; i < data.size(); i++)
+  for (size_t i = 1; i < data.size(); ++i)
     if (data[max_pos] < data[i])
       max_pos = i;
   return max_pos;
@@ -82,7 +82,7 @@ size_t unsorted_vector_with_large_capacity<T>::
 {
   size_t min_pos = 0;
   // for循环的设置可保证集合为空时返回正确值.
-  for (size_t i = 1; i < data.size(); i++)
+  for (size_t i = 1; i < data.size(); ++i)
     if (data[i] < data[min_pos])
       min_pos = i;
   return min_pos;
@@ -102,4 +102,4 @@ size_t unsorted_vector_with_large_capacity<T>::
   return data.size();
 }
 
-#endif  // xUNSORTEDVECTOR_H
+#endif  // UNSORTEDVECTOR_H

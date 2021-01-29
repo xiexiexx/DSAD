@@ -1,8 +1,8 @@
 #include <vector>
 #include <algorithm>
 
-#ifndef xSORTEDVECTOR_H
-#define xSORTEDVECTOR_H
+#ifndef SORTEDVECTOR_H
+#define SORTEDVECTOR_H
 
 template <typename T>
 class sorted_vector_with_large_capacity {
@@ -55,7 +55,7 @@ void sorted_vector_with_large_capacity<T>::
   erase(size_t pos)
 {
   // 也可以使用向量的erase操作.
-  for (size_t i = pos; i < data.size() - 1; i++)
+  for (size_t i = pos; i < data.size() - 1; ++i)
     data[i] = data[i + 1];
   data.pop_back();
 }
@@ -101,4 +101,4 @@ size_t sorted_vector_with_large_capacity<T>::
   return data.size();
 }
 
-#endif  // xSORTEDVECTOR_H
+#endif  // SORTEDVECTOR_H
