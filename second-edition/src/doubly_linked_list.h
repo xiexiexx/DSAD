@@ -57,7 +57,7 @@ public:
   list_iterator& operator-- ()
   {
     pointer = pointer->prev;
-    return *this;  // 返回新值.
+    return *this; // 返回新值.
   }
   // 作为后缀使用的--运算符, 用(int)来标志.
   list_iterator operator-- (int)
@@ -111,7 +111,7 @@ public:
   const list_const_iterator& operator++ ()
   {
     pointer = pointer->next;
-    return *this;  // 返回新值.
+    return *this; // 返回新值.
   }
   // 作为后缀使用的++运算符, 用(int)来标志.
   const list_const_iterator operator++ (int)
@@ -124,7 +124,7 @@ public:
   const list_const_iterator& operator-- ()
   {
     pointer = pointer->prev;
-    return *this;  // 返回新值.
+    return *this; // 返回新值.
   }
   // 作为后缀使用的--运算符, 用(int)来标志.
   const list_const_iterator operator-- (int)
@@ -172,7 +172,7 @@ public:
   const general_reverse& operator++ ()
   {
     --position;
-    return *this;  // 返回新值.
+    return *this; // 返回新值.
   }
   // 作为后缀使用的++运算符, 用(int)来标志.
   const general_reverse operator++ (int)
@@ -185,7 +185,7 @@ public:
   const general_reverse& operator-- ()
   {
     ++position;
-    return *this;  // 返回新值.
+    return *this; // 返回新值.
   }
   // 作为后缀使用的--运算符, 用(int)来标志.
   const general_reverse operator-- (int)
@@ -386,7 +386,8 @@ typename doubly_linked_list<T>::iterator doubly_linked_list<T>::
   dnode<T>* curr = iter.pointer;
   curr->prev->next = curr->next;
   curr->next->prev = curr->prev;
-  iterator iter_next(curr->next); // 保存curr下一结点迭代器作为返回值.
+  // 保存curr下一结点迭代器作为返回值.
+  iterator iter_next(curr->next);
   delete curr;
   --list_size;
   return iter_next;
@@ -422,7 +423,7 @@ const T& doubly_linked_list<T>::back() const
 
 // 注意下列函数返回的迭代器类型.
 
-// 双循环链的初始位置begin(), 用于迭代器.
+// 双循环链的起始位置begin(), 用于迭代器.
 template <typename T>
 typename doubly_linked_list<T>::iterator
   doubly_linked_list<T>::begin()
@@ -430,7 +431,7 @@ typename doubly_linked_list<T>::iterator
   return iterator(header->next);
 }
 
-// 双循环链的初始位置cbegin(), 用于常量迭代器.
+// 双循环链的起始位置cbegin(), 用于常量迭代器.
 template <typename T>
 typename doubly_linked_list<T>::const_iterator
   doubly_linked_list<T>::cbegin() const
@@ -454,7 +455,7 @@ typename doubly_linked_list<T>::const_iterator
   return const_iterator(header);
 }
 
-// 双循环链的逆向初始位置rbegin(), 用于逆向迭代器.
+// 双循环链的逆向起始位置rbegin(), 用于逆向迭代器.
 template <typename T>
 typename doubly_linked_list<T>::reverse_iterator
   doubly_linked_list<T>::rbegin()
@@ -462,7 +463,7 @@ typename doubly_linked_list<T>::reverse_iterator
   return reverse_iterator(iterator(header));
 }
 
-// 双循环链的逆向初始位置crbegin(), 用于常量逆向迭代器.
+// 双循环链的逆向起始位置crbegin(), 用于常量逆向迭代器.
 template <typename T>
 typename doubly_linked_list<T>::const_reverse_iterator
   doubly_linked_list<T>::crbegin() const
