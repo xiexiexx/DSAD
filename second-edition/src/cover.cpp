@@ -4,7 +4,7 @@
 
 int main()
 {
-  std::string S = "Algorithm Design";
+  std::string S {"Algorithm Design"};
   make_heap(S.begin(), S.end());
   sort_heap(S.begin(), S.end());
   auto D = unique(S.begin(), S.end());
