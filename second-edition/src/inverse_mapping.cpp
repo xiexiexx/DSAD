@@ -3,14 +3,8 @@
 #include <unordered_map>
 #include <fstream>
 #include <iostream>
-using std::vector;
-using std::string;
-using std::unordered_map;
-using std::ifstream;
-using std::ofstream;
-using std::cerr;
-using std::pair;
-using std::ios;
+
+using namespace std;
 
 int main()
 {
