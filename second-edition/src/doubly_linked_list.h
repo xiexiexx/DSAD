@@ -236,6 +236,7 @@ public:
   doubly_linked_list<T>& operator= (const doubly_linked_list<T>& rhs);
   size_t size() const;
   bool empty() const;
+  iterator find(const T& item);
   void push_front(const T& item);
   void push_back(const T& item);
   iterator insert(iterator iter, const T& item);
@@ -329,6 +330,19 @@ template <typename T>
 bool doubly_linked_list<T>::empty() const
 {
   return (list_size == 0);
+}
+
+// 查找.
+template <typename T>
+typename doubly_linked_list<T>::iterator doubly_linked_list<T>::
+  find(const T& item)
+{
+  // 在哑元素处放置哨兵.
+  header->data = item;
+  dnode<T>* curr = header->next;
+  while (curr->data != item)
+    curr = curr->next;
+  return iterator(curr); // 返回迭代器位置.
 }
 
 // 在链首添加新元素.
