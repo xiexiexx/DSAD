@@ -237,6 +237,7 @@ public:
   size_t size() const;
   bool empty() const;
   iterator find(const T& item);
+  void reverse();
   void push_front(const T& item);
   void push_back(const T& item);
   iterator insert(iterator iter, const T& item);
@@ -343,6 +344,23 @@ typename doubly_linked_list<T>::iterator doubly_linked_list<T>::
   while (curr->data != item)
     curr = curr->next;
   return iterator(curr); // 返回迭代器位置.
+}
+
+// 链的逆转.
+template <typename T>
+void doubly_linked_list<T>::reverse()
+{
+  // curr初值设定.
+  dnode<T>* curr = header->next;
+  // 依next指针域正向处理所有结点.
+  while (curr != header)
+  {
+    std::swap(curr->prev, curr->next);
+    // 注意原先的下一结点位置现已换到curr->prev处.
+    curr = curr->prev;
+  }
+  // 交换哑结点的指针数据.
+  std::swap(header->prev, header->next);
 }
 
 // 在链首添加新元素.
