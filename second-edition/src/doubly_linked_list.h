@@ -323,6 +323,8 @@ doubly_linked_list<T>& doubly_linked_list<T>::
 template <typename T>
 size_t doubly_linked_list<T>::size() const
 {
+  // 如果需要加入保证常数时间的splice操作,
+  // 那么此处得遍历计数而得到链长, 性能升为线性时间.
   return list_size;
 }
 
