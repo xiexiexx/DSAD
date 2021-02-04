@@ -72,7 +72,8 @@ dynamic_array<T>::dynamic_array(size_t size, const T& value)
   // 构造函数只需一次, 因此这种判断无关乎性能. 此外, 注意size不会为负.
   if (size > 0)
   {
-    initialize(2 * size);
+    // 留出哨兵位置. 假设后续够用, 没有设定2 * size长度的初始容量.
+    initialize(size + 1);
     array_size = size;
     // 以构造函数的初值参数value对向量中所有元素赋值.
     for (size_t i = 0; i < array_size; ++i)
@@ -166,16 +167,16 @@ const T& dynamic_array<T>::operator[] (size_t i) const
 template <typename T>
 void dynamic_array<T>::push_back(const T& item)
 {
-  // 如果容量不够用, 则扩容至现有容量的两倍.
-  if (array_size == array_capacity)
+  // 如果容量不够用, 则扩容至现有容量的两倍, 注意留有哨兵位置.
+  if (array_size + 1 < array_capacity)
+    V[array_size++] = item;
+  else
   {
     // 防止item为V中的元素, 提前保存副本.
     T item_copy = item;
     reserve(2 * array_capacity);
     V[array_size++] = item_copy;
   }
-  else
-    V[array_size++] = item;
 }
 
 // 去除向量的末尾元素.
