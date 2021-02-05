@@ -3,11 +3,9 @@
 #include <string>
 #include <iomanip>
 
-void ChiaHsienTriangle(int n)
+void ChiaHsien_triangle(int n, int width)
 {
-  // 打印贾宪三角的前n + 1行, 由于宽度限制n最大取12.
-  // 二项式系数的宽度, 随n的值增大而增大, 此处取3足矣.
-  int width = 3;
+  // 以宽度width打印关于整数n的贾宪三角,
   std::queue<int> Q;
   Q.push(1);	// 第0行仅有1个元素.
   for(int i = 0; i < n + 1; i++)
