@@ -34,7 +34,7 @@ template <typename T>
 unsorted_vector_with_large_capacity<T>::
   unsorted_vector_with_large_capacity()
 {
-  // 为其设置较大容量, 初始向量长度定为3142, 元素个数定为0.
+  // 为其设置较大容量, 初始向量长度定为3142, 元素个数为0.
   data.reserve(3142);
 }
 
