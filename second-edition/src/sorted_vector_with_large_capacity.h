@@ -20,7 +20,7 @@ public:
   // 返回集合中最小元素的位置, 若集合为空则返回size().
   size_t minimum_at() const;
   // 返回pos位置元素的常量引用, 注意未提供非常量版本.
-  const T& operator()(int pos) const;
+  const T& operator()(size_t pos) const;
   // 返回集合中元素的个数.
   size_t size() const;
 private:
@@ -35,7 +35,7 @@ template <typename T>
 sorted_vector_with_large_capacity<T>::
   sorted_vector_with_large_capacity()
 {
-  // 为其设置较大容量, 初始向量长度定为3142, 元素个数定为0.
+  // 为其设置较大容量, 初始向量长度定为3142, 元素个数为0.
   data.reserve(3142);
 }
 
@@ -43,9 +43,9 @@ template <typename T>
 void sorted_vector_with_large_capacity<T>::
   insert(const T& key)
 {
-  // 可以线性查找找出合适的迭代器插入位置,
+  // 可以用线性查找获取合适的迭代器插入位置,
   // 若找不到合适的位置则意味应插入末尾.
-  // 更好的方案是基于二分查找完成, 注意我们调用的是upper_bound.
+  // 这里采用更好的方案也即二分查找, 注意我们调用的是upper_bound.
   auto iter = upper_bound(data.begin(), data.end(), key);
   data.insert(iter, key);
 }
@@ -54,7 +54,7 @@ template <typename T>
 void sorted_vector_with_large_capacity<T>::
   erase(size_t pos)
 {
-  // 也可以使用向量的erase操作.
+  // 注意执行erase的前提是size() > 0. 另外, 也可使用向量的erase操作.
   for (size_t i = pos; i < data.size() - 1; ++i)
     data[i] = data[i + 1];
   data.pop_back();
@@ -65,7 +65,8 @@ size_t sorted_vector_with_large_capacity<T>::
   find(const T& key) const
 {
   auto iter = lower_bound(data.begin(), data.end(), key);
-  // 注意我们没有用==运算符来判定, 而是用<运算符构造的等价关系.
+  // 注意我们没有用==运算符来判定, 而是用<运算符构造的等价关系,
+  // 主要原因是STL中的二分查找仅使用<运算符, ==运算符未必能表达等价关系.
   if (iter != data.end() && !(*iter < key) && !(key < *iter))
     return iter - data.begin();   // 找到.
   return data.size();             // 未找到.
@@ -89,7 +90,7 @@ size_t sorted_vector_with_large_capacity<T>::
 
 template <typename T>
 const T& sorted_vector_with_large_capacity<T>::
-  operator()(int pos) const
+  operator()(size_t pos) const
 {
   return data[pos];
 }
