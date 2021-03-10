@@ -45,8 +45,9 @@ void sorted_vector_with_large_capacity<T>::
 {
   // 可以用线性查找获取合适的迭代器插入位置,
   // 若找不到合适的位置则意味应插入末尾.
-  // 这里采用更好的方案也即二分查找, 注意我们调用的是upper_bound.
+  // 这里采用更好的方案也即二分查找, 注意调用的是upper_bound.
   auto iter = upper_bound(data.begin(), data.end(), key);
+  // 直接使用向量的插入功能.
   data.insert(iter, key);
 }
 
@@ -64,9 +65,11 @@ template <typename T>
 size_t sorted_vector_with_large_capacity<T>::
   find(const T& key) const
 {
+  // 使用二分查找, 注意这里调用的是lower_bound.
   auto iter = lower_bound(data.begin(), data.end(), key);
   // 注意我们没有用==运算符来判定, 而是用<运算符构造的等价关系,
   // 主要原因是STL中的二分查找仅使用<运算符, ==运算符未必能表达等价关系.
+  // 此外, 由于向量连续存储元素, 可用迭代器减法得到下标的偏移值.
   if (iter != data.end() && !(*iter < key) && !(key < *iter))
     return iter - data.begin();   // 找到.
   return data.size();             // 未找到.
