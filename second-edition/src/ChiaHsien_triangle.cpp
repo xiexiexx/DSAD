@@ -21,10 +21,10 @@ void ChiaHsien_triangle(uint64_t n, int width)
                 << std::string(width, ' ');
       // 当前元素Q.front()与前一个出队元素prev相加形成下一行新元素.
       Q.push( prev + Q.front() );
-      prev = Q.front();	// 更新prev以便下次使用.
+      prev = Q.front();   // 更新prev以便下次使用.
       Q.pop();
     }
-    Q.push(1);	// 最后得补上下一行行尾的1.
+    Q.push(1);            // 最后得补上下一行行尾的1.
     std::cout << std::endl;
   }
 }
