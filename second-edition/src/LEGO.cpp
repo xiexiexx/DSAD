@@ -57,9 +57,9 @@ void LEGO::solve(point init_spot)
 
 void LEGO::print(int width)
 {
-  for (size_t i = 0; i < length; i++)
+  for (size_t i = 0; i < length; ++i)
   {
-    for (size_t j = 0; j < length; j++)
+    for (size_t j = 0; j < length; ++j)
       std::cout << std::setw(width) << baseplate(i, j);
     std::cout << std::endl;
   }

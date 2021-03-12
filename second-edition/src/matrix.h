@@ -37,7 +37,7 @@ template <typename T>
 matrix<T>::matrix(size_t p, size_t q, const T& value)
   : M(p), n_rows(p), n_cols(q)
 {
-  for (size_t i = 0; i < p; i++)
+  for (size_t i = 0; i < p; ++i)
     M[i].resize(q, value);
 }
 

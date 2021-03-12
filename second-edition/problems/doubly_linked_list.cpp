@@ -10,16 +10,16 @@ int main()
   const int MAX = 10;
   vector<int> V(d);
   list<int> L;
-  for(int i = 0; i < d; i++)
+  for(int i = 0; i < d; ++i)
   {
     cin >> V[i];
     L.push_back(V[i]);
   }
   auto iter = L.begin();
   int x = 0;
-  for(int i = 0; i < MAX; i++)
+  for(int i = 0; i < MAX; ++i)
   {
-    for(int j = 0; j < w; j++)
+    for(int j = 0; j < w; ++j)
     {
       #ifndef _MSC_VER  // 非Visual C++环境.
         ++iter;

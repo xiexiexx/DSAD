@@ -62,7 +62,7 @@ int main()
   outfile.close();
   // 输出编号数据对到pairs_out.txt文件中.
   outfile = ofstream("pairs_out.txt", ios::out);
-  for (size_t i = 0; i < PV.size(); i++)
+  for (size_t i = 0; i < PV.size(); ++i)
   {
     // 分别将数据对PV[i]的第一个元素和第二个元素输出到文件中.
     outfile << PV[i].first << '\t';

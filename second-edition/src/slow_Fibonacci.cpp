@@ -13,6 +13,6 @@ uint64_t Fibonacci(unsigned int n)
 
 void Fibonacci_sequence(unsigned int m)
 {
-  for (unsigned int i = 0; i < m; i++)
+  for (unsigned int i = 0; i < m; ++i)
     std::cout << Fibonacci(i) << ' ' << i << std::endl;
 }

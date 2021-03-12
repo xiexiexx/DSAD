@@ -8,7 +8,7 @@ int main()
   const int N = 10000;    // 数组长度
   char data[N];           // 字符数组
   const int M = 26;       // 模
-  for (int i = 0; i < N; i++)
+  for (int i = 0; i < N; ++i)
   {
     x = (x * x) % M;
     data[i] = x + 'a';

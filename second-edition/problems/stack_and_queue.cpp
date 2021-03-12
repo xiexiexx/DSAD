@@ -9,7 +9,7 @@ int main()
   int x = 7;                // 随意指定.
   stack<int> S;
   queue<char> Q;
-  for (size_t i = 0; i < d; i++)
+  for (size_t i = 0; i < d; ++i)
   {
     int num;
     cin >> num;             // 依次输入你的学号, 每次输入1个数字.

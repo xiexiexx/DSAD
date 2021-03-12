@@ -8,13 +8,13 @@ void ChiaHsien_triangle(uint64_t n, int width)
   // 以宽度width打印关于整数n的贾宪三角,
   std::queue<uint64_t> Q;
   Q.push(1);	// 第0行仅有1个元素.
-  for(uint64_t i = 0; i < n + 1; i++)
+  for(uint64_t i = 0; i < n + 1; ++i)
   {
     // 以(n - i) * width为宽度打印前导空格.
     std::cout << std::string((n - i) * width, ' ');;
     uint64_t prev = 0;
     // 打印当前行并生成下一行新元素.
-    for(uint64_t j = 0; j < i + 1; j++)
+    for(uint64_t j = 0; j < i + 1; ++j)
     {
       // 每项及其后的空格均占width宽度.
       std::cout << std::setw(width) << Q.front()

@@ -19,7 +19,7 @@ int main()
   int seed = 314159;  // 取值限定为(0, M)范围内.
   int n = 42;
   int m = 73;
-  for (int i = 0; i < n; i++)
+  for (int i = 0; i < n; ++i)
   {
     random(seed);
     double r = static_cast<double>(seed) / static_cast<double>(M);
