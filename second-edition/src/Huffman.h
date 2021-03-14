@@ -29,7 +29,8 @@ public:
   // 构造函数.
   Huffman(hnode* p = NULL);
   // 编码函数.
-  void coding(const std::vector<double>& P, std::vector<std::string>& C);
+  void coding(const std::vector<double>& P,
+              std::vector<std::string>& C);
 private:
   // 根结点.
   hnode* root;
