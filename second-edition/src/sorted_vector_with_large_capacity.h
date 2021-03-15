@@ -67,8 +67,8 @@ size_t sorted_vector_with_large_capacity<T>::
 {
   // 使用二分查找, 注意这里调用的是lower_bound.
   auto iter = lower_bound(data.begin(), data.end(), key);
-  // 注意我们没有用==运算符来判定, 而是用<运算符构造的等价关系,
-  // 主要原因是STL中的二分查找仅使用<运算符, ==运算符未必能表达等价关系.
+  // 注意我们没有用==运算符来判定, 而是用<运算符构造的相等关系,
+  // 主要原因是STL中的二分查找仅使用<运算符, ==运算符可能只是等价关系.
   // 此外, 由于向量连续存储元素, 可用迭代器减法得到下标的偏移值.
   if (iter != data.end() && !(*iter < key) && !(key < *iter))
     return iter - data.begin();   // 找到.
