@@ -16,8 +16,7 @@ struct hnode {
 
 // greater_hnode_pointer为hnode型指针定义的函数对象,
 // 用于比较该型指针所指向对象之间的大于关系.
-class greater_hnode_pointer {
-public:
+struct greater_hnode_pointer {
   bool operator()(const hnode* a, const hnode* b) const
   {
     return (a->weight > b->weight);
