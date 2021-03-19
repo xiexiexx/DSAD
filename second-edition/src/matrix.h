@@ -23,7 +23,7 @@ public:
     return n_cols;
   }
 private:
-  // 内部实现是一个向量的向量,
+  // 内部实现是一个向量的向量, 也即M.
   // 有兴趣的读者可测试sizeof(vector<T>)的值并思考.
   std::vector<std::vector<T>> M;
   // 矩阵的行数.
