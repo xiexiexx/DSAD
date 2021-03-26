@@ -11,7 +11,7 @@ public:
   sorted_vector_with_large_capacity();
   // 将key放入集合中.
   void insert(const T& key);
-  // 将pos位置所在的元素删除, 前提是集合非空且pos在0到size() - 1之间.
+  // 将pos位置所在的元素删除, 前提是集合非空且pos在[0, size())区间内.
   void erase(size_t pos);
   // 若key在集合中则返回其位置, 否则返回size().
   size_t find(const T& key) const;
@@ -27,15 +27,15 @@ private:
   std::vector<T> data;
 };
 
-// 简记为S1.
+// 简记为SV.
 template <typename T>
-using S1 = sorted_vector_with_large_capacity<T>;
+using SV = sorted_vector_with_large_capacity<T>;
 
 template <typename T>
 sorted_vector_with_large_capacity<T>::
   sorted_vector_with_large_capacity()
 {
-  // 为其设置较大容量, 初始向量长度定为3142, 元素个数为0.
+  // 为其设置较大容量, 初始向量容量定为3142, 元素个数为0.
   data.reserve(3142);
 }
 
@@ -57,7 +57,7 @@ void sorted_vector_with_large_capacity<T>::
 {
   // 注意执行erase的前提是size() > 0. 另外, 也可使用向量的erase操作.
   for (size_t i = pos; i < data.size() - 1; ++i)
-    data[i] = data[i + 1];
+    data[i] = data[i + 1];  // 也可使用移动语义.
   data.pop_back();
 }
 
