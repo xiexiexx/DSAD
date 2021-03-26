@@ -8,10 +8,10 @@ using std::endl;
 
 void input_preprocess(list<int>& L, int& m)
 {
-  L.clear();		// 清空L中所有数据.
+  L.clear();      // 清空L中所有数据.
   int data;
   std::cin >> data;
-  m = data;		// 注意空序列时m为负整数.
+  m = data;       // 注意空序列时m为负整数.
   while (data >= 0)
   {
     // 使用push_back可以保留数据的输入次序.
@@ -19,7 +19,7 @@ void input_preprocess(list<int>& L, int& m)
     // 同时统计最大值.
     if (data > m)
       m = data;
-    cin >> data;	// 读入数据.
+    cin >> data;  // 读入数据.
   }
 }
 
@@ -41,7 +41,7 @@ void mean_of_larger(list<int>& L, int d, int m)
   // 满足要求的数之总和, 以double型存储便于后续计算.
   double sum = 0;
   // 满足要求的自然数个数.
-  int n = 0;
+  size_t n = 0;
   // 使用auto定义迭代器iter, 注意可能利用它删除元素,
   // 因为删除会改变容器状态, 所以iter是list<int>::iterator型的迭代器.
   auto iter = L.begin();
@@ -50,8 +50,8 @@ void mean_of_larger(list<int>& L, int d, int m)
     if (*iter >= threshold)
     {
       sum += *iter;
-      n++;
-      ++iter;               // 迭代器向前.
+      ++n;
+      ++iter;               // 注意后续删除分支不能这样操作.
     }
     else
       iter = L.erase(iter); // 删除后iter会被赋值到下一元素位置.
