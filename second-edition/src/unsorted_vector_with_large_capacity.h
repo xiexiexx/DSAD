@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 
 #ifndef UNSORTEDVECTOR_H
 #define UNSORTEDVECTOR_H
@@ -10,7 +11,7 @@ public:
   unsorted_vector_with_large_capacity();
   // 将key放入集合中.
   void insert(const T& key);
-  // 将pos位置所在的元素删除, 前提是集合非空且pos在0到size() - 1之间.
+  // 将pos位置所在的元素删除, 前提是集合非空且pos在[0, size())区间内.
   void erase(size_t pos);
   // 若key在集合中则返回其位置, 否则返回size().
   size_t find(const T& key) const;
@@ -26,15 +27,15 @@ private:
   std::vector<T> data;
 };
 
-// 简记为S2.
+// 简记为UV.
 template <typename T>
-using S2 = unsorted_vector_with_large_capacity<T>;
+using UV = unsorted_vector_with_large_capacity<T>;
 
 template <typename T>
 unsorted_vector_with_large_capacity<T>::
   unsorted_vector_with_large_capacity()
 {
-  // 为其设置较大容量, 初始向量长度定为3142, 元素个数为0.
+  // 为其设置较大容量, 初始向量容量定为3142, 元素个数为0.
   data.reserve(3142);
 }
 
