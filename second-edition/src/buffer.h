@@ -17,11 +17,11 @@ public:
   size_t capacity() const;
 private:
   std::vector<T> Q;
-  // 缓冲区容量实为Q.size(), 单独设置是为了避免频繁调用.
+  // 缓冲区容量实为Q.size(), 单独设置length是为了避免频繁调用.
   size_t length;
   // 缓冲区元素个数.
   size_t count;
-  // 缓冲区循环意义上的区间[left, right).
+  // 缓冲区循环意义下的区间[left, right).
   size_t left;
   size_t right;
 };
