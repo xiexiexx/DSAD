@@ -5,40 +5,40 @@
 
 class xTimer {
 private:
-	std::clock_t startTime;
-	std::clock_t endTime;
+  std::clock_t startTime;
+  std::clock_t endTime;
 public:
-	xTimer();
-	void start();
-	void stop();
-	double time() const;
+  xTimer();
+  void start();
+  void stop();
+  double time() const;
 };
 
-// ÒÔÏÂxTimerÀàÊµÏÖ¶¼Ê¹ÓÃÁËinlineĞÎÊ½.
+// ä»¥ä¸‹xTimerç±»å®ç°éƒ½ä½¿ç”¨äº†inlineå½¢å¼.
 
 inline xTimer::xTimer()
-	: startTime(0), endTime(0)
+  : startTime(0), endTime(0)
 {}
 
-// ¼ÆÊ±¿ªÊ¼.
+// è®¡æ—¶å¼€å§‹.
 inline void xTimer::start()
 {
-	startTime = std::clock();
+  startTime = std::clock();
 }
 
-// ¼ÆÊ±½áÊø.
+// è®¡æ—¶ç»“æŸ.
 inline void xTimer::stop()
 {
-	endTime = std::clock();
+  endTime = std::clock();
 }
 
-// ·µ»Ø¼ÆÊ±Ê±¼ä.
+// è¿”å›è®¡æ—¶æ—¶é—´.
 inline double xTimer::time() const
 {
-	return static_cast<double>(endTime - startTime)
-		/ static_cast<double>(CLOCKS_PER_SEC);
-	// ×¢Òâ×ª»»µÄÊÇdoubleĞÍ£¬·ñÔò¿ÉÄÜ¶ÔÓ¦ÀàËÆÕûÊıµÄ³ı·¨½á¹û, ²úÉú´íÎó.
-	// Ò»°ãCLOCKS_PER_SECÎªÕûÊı1000.
+  return static_cast<double>(endTime - startTime)
+    / static_cast<double>(CLOCKS_PER_SEC);
+  // æ³¨æ„è½¬æ¢çš„æ˜¯doubleå‹ï¼Œå¦åˆ™å¯èƒ½å¯¹åº”ç±»ä¼¼æ•´æ•°çš„é™¤æ³•ç»“æœ, äº§ç”Ÿé”™è¯¯.
+  // ä¸€èˆ¬CLOCKS_PER_SECä¸ºæ•´æ•°1000.
 }
 
 #endif // TIMER_CLASS
