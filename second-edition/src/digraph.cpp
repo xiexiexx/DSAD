@@ -50,7 +50,7 @@ void digraph::add_vertex()
 
 void digraph::visit(size_t v)
 {
-  // 此处访问v是直接在屏幕上输出. 
+  // 此处访问v是直接打印. 
   // 读者可自行修改这个访问顶点函数的功能, 也可令其无任何动作.
   std::cout << v << " ";
 }
