@@ -8,33 +8,25 @@ void merge_forward_list(std::forward_list<T>& F,
 {
   // 定位归并目标位置的迭代器.
   auto position = F.before_begin();
-  // 单链F的迭代器first_iter, 初始位置为F.begin().
-  auto first_iter = F.begin();
-  // 单链S的迭代器second_iter, 初始位置为S.begin().
+  // 单链F的迭代器iter, 初始位置为F.begin().
+  auto iter = F.begin();
+  // 注意S中结点只会并入, 所以只需要取链首位置S.begin()即可.
   auto second_iter = S.begin();
-  // second_iter之前的迭代器位置before_second_iter.
-  auto before_second_iter = S.before_begin();
-  // F和S都有元素可用于归并则循环继续.
-  while (first_iter != F.end() && second_iter != S.end())
+  // 如果F和S都有元素可用于归并则循环继续.
+  while (iter != F.end() && S.begin() != S.end())
   {
-    if (*first_iter < *second_iter)
-      ++first_iter;   // F的迭代器前进, 元素不需要变动.
-    else
-    {
-      // 将S中元素*second_iter并入目标位置,
-      // 注意使用的迭代器位置是before_second_iter.
-      F.splice_after(position, S, before_second_iter);
-      second_iter = before_second_iter;
-      ++second_iter;
-    }
+    if (*iter < S.front())
+      ++iter;   // F的迭代器前进, 元素不需要变动.
+    else  // 将S中链首元素并入目标位置position, 注意用的是S.before_begin().
+      F.splice_after(position, S, S.before_begin());
     ++position;       // 目标位置迭代器前进.
   }
-  // 将S中剩余部分(before_second_iter, S.end())范围元素并入,
-  // 若无元素则F无变化, 注意两端都是开区间的端点.
-  F.splice_after(position, S, before_second_iter, S.end());
+  // 将S中剩余部分(S.before_begin(), S.end())范围元素并入,
+  // 若无元素则F不变, 注意两个迭代器都是开区间的端点.
+  F.splice_after(position, S, S.before_begin(), S.end());
 }
 
-// 对单链data中元素进行归并排序.
+// 对单链data中的元素进行归并排序.
 template <typename T>
 void forward_list_merge_sort(std::forward_list<T>& data)
 {
@@ -46,24 +38,25 @@ void forward_list_merge_sort(std::forward_list<T>& data)
   auto position = L.before_begin();
   for (auto iter = data.begin(); iter != data.end(); ++iter)
   {
+    // 注意*iter与{*iter}的区别, 后者是仅包含*iter这个元素的单链.
     position = L.insert_after(position, {*iter});
     ++n;
   }
-  // 若链中至少剩余两个元素则持续归并.
+  // 若链L中至少剩余两个有序单链则持续归并.
   while (n > 1)
   {
-    // 若L中不止一个有序单链, 则进行一趟归并.
+    // 以m标记本趟还剩余的有序单链数.
     size_t m = n;
     auto first_list = L.begin();
-    // 一趟归并中每次将两个有序单链归并成一个, 如果还可归并则不断进行.
+    // 一趟归并中每次将两个有序单链归并成一个, 如果还可归并则不断循环.
     while (m > 1)
     {
       auto second_list = first_list;
       ++second_list;
-      // 将first_list和second_list指示的单链归并.
+      // 将first_list和second_list所对应的单链归并.
       merge_forward_list(*first_list, *second_list);
-      // 设当前迭代器位置依次为first_list, second_list, next.
-      // 删除second_list所指示的单链, 并让first_list变为next.
+      // 假设当前迭代器位置依次为first_list, second_list, next_list.
+      // 删除second_list所指示的单链, 并让first_list变为next_list.
       first_list = L.erase_after(first_list);
       // 本趟归并所剩余的有序单链数减少2.
       m -= 2;

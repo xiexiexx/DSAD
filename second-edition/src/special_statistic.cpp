@@ -10,7 +10,7 @@ void input_preprocess(list<int>& L, int& m)
 {
   L.clear();      // 清空L中所有数据.
   int data;
-  std::cin >> data;
+  cin >> data;
   m = data;       // 注意空序列时m为负整数.
   while (data >= 0)
   {
@@ -27,7 +27,6 @@ void print(const list<int>& L)
 {
   // 由于此次遍历不改变链的状态, 所以使用常量迭代器citer.
   // 常量迭代器可保证对L的常量引用, 特别以cbegin和cend区别于begin和end.
-  // 此外要特别注意for语句中使用常量迭代器遍历的惯用法.
   // 也可使用基于范围的for循环完成.
   for (auto citer = L.cbegin(); citer != L.cend(); ++citer)
     cout << *citer << ' ';
@@ -43,7 +42,7 @@ void mean_of_larger(list<int>& L, int d, int m)
   // 满足要求的自然数个数.
   size_t n = 0;
   // 使用auto定义迭代器iter, 注意可能利用它删除元素,
-  // 因为删除会改变容器状态, 所以iter是list<int>::iterator型的迭代器.
+  // 而删除会改变容器状态, 所以iter是list<int>::iterator型迭代器.
   auto iter = L.begin();
   while (iter != L.end())
   {
@@ -56,8 +55,8 @@ void mean_of_larger(list<int>& L, int d, int m)
     else
       iter = L.erase(iter); // 删除后iter会被赋值到下一元素位置.
   }
-  cout << "The mean of the larger numbers is " << sum / n << endl;
-  cout << "Larger numbers: ";
-  // 要求最后输出被保留的那些自然数, 所以需要再次遍历.
+  cout << "The mean of the larger numbers is " << sum / n
+       << endl << "Larger numbers: ";
+  // 要求最后打印所保留的那些自然数, 所以需要再次遍历.
   print(L);
 }
