@@ -11,15 +11,14 @@ void merge_forward_list(std::forward_list<T>& F,
   // 单链F的迭代器iter, 初始位置为F.begin().
   auto iter = F.begin();
   // 注意S中结点只会并入, 所以只需要取链首位置S.begin()即可.
-  auto second_iter = S.begin();
   // 如果F和S都有元素可用于归并则循环继续.
   while (iter != F.end() && S.begin() != S.end())
   {
     if (*iter < S.front())
-      ++iter;   // F的迭代器前进, 元素不需要变动.
-    else  // 将S中链首元素并入目标位置position, 注意用的是S.before_begin().
+      ++iter;     // F的迭代器前进, 元素不需要变动.
+    else  // 将S中链首元素并入目标位置, 注意用的是S.before_begin().
       F.splice_after(position, S, S.before_begin());
-    ++position;       // 目标位置迭代器前进.
+    ++position;   // 目标位置迭代器前进.
   }
   // 将S中剩余部分(S.before_begin(), S.end())范围元素并入,
   // 若无元素则F不变, 注意两个迭代器都是开区间的端点.
