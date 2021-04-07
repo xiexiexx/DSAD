@@ -1,8 +1,8 @@
 #include <vector>
 #include <list>
 
-#ifndef DIGRAPH
-#define DIGRAPH
+#ifndef DIGRAPH_CLASS
+#define DIGRAPH_CLASS
 
 class digraph {
 public:
@@ -33,4 +33,4 @@ protected:
   void depth_first_search(size_t v);    // 私有递归DFS访问函数.
 };
 
-# endif // DIGRAPH
+# endif // DIGRAPH_CLASS
