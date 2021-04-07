@@ -24,4 +24,4 @@ private:
   size_t label;             // 编号, 为新铺砖标记编号且不断增加.
 };
 
-#endif
+#endif  // LEGO_CLASS
