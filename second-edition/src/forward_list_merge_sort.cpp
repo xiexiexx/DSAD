@@ -14,9 +14,12 @@ void merge_forward_list(std::forward_list<T>& F,
   // 如果F和S都有元素可用于归并则循环继续.
   while (iter != F.end() && S.begin() != S.end())
   {
+    // 若果F中当前元素较小, 那么F的迭代器前进, 元素不需要变动;
+    // 否则将S的链首元素并入目标位置position,
+    // 注意splice_after用的是S.before_begin().
     if (*iter < S.front())
-      ++iter;     // F的迭代器前进, 元素不需要变动.
-    else  // 将S中链首元素并入目标位置, 注意用的是S.before_begin().
+      ++iter;
+    else
       F.splice_after(position, S, S.before_begin());
     ++position;   // 目标位置迭代器前进.
   }
@@ -44,7 +47,7 @@ void forward_list_merge_sort(std::forward_list<T>& data)
   // 若链L中至少剩余两个有序单链则持续归并.
   while (n > 1)
   {
-    // 以m标记本趟还剩余的有序单链数.
+    // 以m标记本趟尚剩余的有序单链数.
     size_t m = n;
     auto first_list = L.begin();
     // 一趟归并中每次将两个有序单链归并成一个, 如果还可归并则不断循环.
@@ -55,7 +58,7 @@ void forward_list_merge_sort(std::forward_list<T>& data)
       // 将first_list和second_list所对应的单链归并.
       merge_forward_list(*first_list, *second_list);
       // 假设当前迭代器位置依次为first_list, second_list, next_list.
-      // 删除second_list所指示的单链, 并让first_list变为next_list.
+      // 删除second_list所对应的单链, 并让first_list变为next_list.
       first_list = L.erase_after(first_list);
       // 本趟归并所剩余的有序单链数减少2.
       m -= 2;
@@ -73,6 +76,7 @@ int main()
   std::forward_list<int> L {3, 1, 2, 4, 5};
   forward_list_merge_sort(L);
   for (const auto& x : L)
-    std::cout << x << std::endl;
+    std::cout << x << ' ';
+  std::cout << std::endl;
   return 0;
 }
