@@ -3,9 +3,6 @@
 #include <random>
 #include <chrono>
 
-// 标准库提供了std::shuffle函数, 也可直接调用.
-// 注意还有shuffle_order_engine, 例如knuth_b.
-
 template <typename T>
 void shuffling(std::vector<T>& V)
 {
