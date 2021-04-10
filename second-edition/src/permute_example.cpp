@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+// 注意我们包含了timer头文件用于计时. 
 #include "timer.h"
 
 // 记V.size()为n, 固定V[0]到V[k - 1], 生成V[k]到V[n - 1]的所有排列,
