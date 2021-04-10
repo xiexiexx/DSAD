@@ -6,7 +6,7 @@ const int Q = M / A;
 const int R = M % A;
 
 // 将X更改为伪随机整数序列的下一个数, 其范围仍保持(0, M).
-void random(int& X)
+void pseudorandom(int& X)
 {
   X = A * (X % Q) - R * (X / Q);
   if (X < 0)
@@ -21,7 +21,7 @@ int main()
   int m = 73;
   for (int i = 0; i < n; ++i)
   {
-    random(seed);
+    pseudorandom(seed);
     double r = static_cast<double>(seed) / static_cast<double>(M);
     std::cout << static_cast<int>(r * m) << ' ';
   }
