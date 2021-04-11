@@ -15,6 +15,7 @@ Huffman::Huffman(hnode* p)
 void Huffman::tree_coding(hnode* p, const string& prefix)
 {
   // 若p不为NULL则递归对以p为根的子树所有结点进行编码.
+  // 读者可思考利用层次遍历对结点编码.
   if (p != NULL)
   {
     // 结点p的左子树所有前缀是prefix配0.
@@ -42,6 +43,7 @@ void Huffman::coding(const vector<double>& P, vector<string>& C)
   // 初始放入n个仅有根结点的树.
   for (index = 0; index < P.size(); ++index)
   {
+    // 以下赋值部分还可以写得更简洁.
     // 对应需编码的符号, 编号为自然数.
     data[index].number = index;
     // 结点权值按照概率向量赋值.
@@ -77,6 +79,7 @@ void Huffman::coding(const vector<double>& P, vector<string>& C)
   if (!PQ.empty())
   {
     tree_coding(PQ.top(), "");
-    C = HC;		// 将最终编码复制给C.
+    // 将最终编码复制给C.
+    C = HC;
   }
 }
