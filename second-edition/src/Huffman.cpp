@@ -39,7 +39,8 @@ void Huffman::coding(const vector<double>& P, vector<string>& C)
   // 一次性给出所有在编码中会出现的结点.
   vector<hnode> data (2 * P.size() - 1);
   // index作为编号, 指示当前会使用data[index]处的结点.
-  size_t index;		// 注意其作用域不仅限于下面的for循环.
+  // 注意index的作用域不仅限于下面的for循环.
+  size_t index;
   // 初始放入n个仅有根结点的树.
   for (index = 0; index < P.size(); ++index)
   {
