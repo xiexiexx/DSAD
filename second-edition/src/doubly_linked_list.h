@@ -237,6 +237,7 @@ public:
   size_t size() const;
   bool empty() const;
   iterator find(const T& item);
+  const_iterator find(const T& item) const;
   void reverse();
   void push_front(const T& item);
   void push_back(const T& item);
@@ -325,7 +326,7 @@ size_t doubly_linked_list<T>::size() const
 {
   // 如果需要加入任意区间都能保证常数时间的splice操作,
   // 那么此处得遍历计数而得到链长, 性能升为线性时间.
-  // 当然也可以限定splice操作的性能, 取得较好的平衡. 
+  // 当然也可以限定splice操作的性能, 取得较好的平衡.
   return list_size;
 }
 
@@ -347,6 +348,19 @@ typename doubly_linked_list<T>::iterator doubly_linked_list<T>::
   while (curr->data != item)
     curr = curr->next;
   return iterator(curr); // 返回迭代器位置.
+}
+
+// 查找的常量版本.
+template <typename T>
+typename doubly_linked_list<T>::const_iterator doubly_linked_list<T>::
+  find(const T& item) const
+{
+  // 在哑元素处放置哨兵.
+  header->data = item;
+  dnode<T>* curr = header->next;
+  while (curr->data != item)
+    curr = curr->next;
+  return const_iterator(curr); // 返回常量迭代器位置.
 }
 
 // 链的逆转.
