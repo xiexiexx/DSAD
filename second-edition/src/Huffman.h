@@ -14,7 +14,7 @@ struct hnode {
   hnode* right;       // 右孩子.
 };
 
-// greater_hnode_pointer为hnode型指针定义的函数对象,
+// greater_hnode_pointer是为hnode型指针而定义的函数对象,
 // 用于比较该型指针所指向对象之间的大于关系.
 struct greater_hnode_pointer {
   bool operator()(const hnode* a, const hnode* b) const
@@ -26,17 +26,24 @@ struct greater_hnode_pointer {
 class Huffman {
 public:
   // 构造函数.
-  Huffman(hnode* p = NULL);
-  // 编码函数.
-  void coding(const std::vector<double>& P,
-              std::vector<std::string>& C);
+  Huffman();
+  // 基于P中的概率分布进行编码.
+  void coding(const std::vector<double>& P);
+  // 译码函数.
+  size_t symbol(const std::string& code);
+  // 码字函数.
+  const std::string& codeword(size_t i);
+  // 码簿大小.
+  size_t size();
 private:
   // 根结点.
   hnode* root;
   // 递归编码函数.
   void tree_coding(hnode* p, const std::string& prefix);
-  // 保存编码的向量HC.
-  std::vector<std::string> HC;
+  // 保存编码的向量C.
+  std::vector<std::string> C;
+  // 树.
+  std::vector<hnode> tree;
 };
 
 # endif // HUFFMAN_TREE
