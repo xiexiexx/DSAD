@@ -16,9 +16,8 @@ void treasure_hunting(const vector<vector<string>>& H,
     return;
   // 存放待找宝物的多重集合S.
   multiset<string> S;
-  // 将宝物逐个加入多重集合S中.
-  for (const auto& x : F)
-    S.insert(x);
+  // 使用移动语义将宝物逐个转存并插入多重集合S中.
+  std::move(F.begin(), F.end(), std::inserter(S, S.end()));
   for (size_t i = 0; i < H.size(); ++i)
   {
     for (size_t j = 0; j < H[i].size(); ++j)
