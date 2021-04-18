@@ -12,8 +12,8 @@ struct information {
 class disjoint_sets {
 public:
   disjoint_sets(size_t n);        // 构造函数.
-  void merge(size_t x, size_t y); // 合并.
-  size_t find(size_t x);          // 寻找代表元.
+  void merge(size_t x, size_t y); // 合并操作(注意x和y均为代表元).
+  size_t find(size_t z);          // 查找z所在集合的代表元.
   size_t size() const;            // 元素总数.
   size_t count() const;           // 不相交集的个数.
   void print() const;             // 打印当前结构信息.
