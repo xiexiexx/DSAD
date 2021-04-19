@@ -12,7 +12,10 @@ disjoint_sets::disjoint_sets(size_t n)
 
 void disjoint_sets::merge(size_t x, size_t y)
 {
-  // x和y都为集合的代表元, 不相等才能合并.
+  // 编号超出范围则不处理.
+  if (x >= D.size() || y >= D.size())
+    return;
+  // x和y必须都为集合的代表元/树根结点, 并且互不相等才能合并.
   if (x == y)
     return;
   --disjoint_count;
@@ -30,19 +33,22 @@ void disjoint_sets::merge(size_t x, size_t y)
   }
 }
 
-size_t disjoint_sets::find(size_t x)
+size_t disjoint_sets::find(size_t z)
 {
+  // 超出范围的编号则返回D.size()以示不存在.
+  if (z >= D.size())
+    return D.size();
   // 使用两次迭代完成.
-  size_t root = x;
+  size_t root = z;
   // 先查找代表元.
   while (D[root].parent != root)
     root = D[root].parent;
   // 再进行路径压缩.
-  while (x != root)
+  while (z != root)
   {
-    size_t parent = D[x].parent;
-    D[x].parent = root;
-    x = parent;
+    size_t parent = D[z].parent;
+    D[z].parent = root;
+    z = parent;
   }
   return root;
 }
