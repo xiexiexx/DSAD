@@ -14,7 +14,7 @@ struct hnode {
   hnode* right;       // 右孩子.
 };
 
-// greater_hnode_pointer是为hnode型指针而定义的函数对象,
+// greater_hnode_pointer是为hnode型指针而定义的函数对象结构体,
 // 用于比较该型指针所指向对象之间的大于关系.
 struct greater_hnode_pointer {
   bool operator()(const hnode* a, const hnode* b) const
