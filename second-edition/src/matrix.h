@@ -39,6 +39,7 @@ matrix<T>::matrix(size_t p, size_t q, const T& value)
 {
   for (size_t i = 0; i < p; ++i)
     M[i].resize(q, value);
+  // 也可换用M(p, std::vector<T>(q, value))构造.
 }
 
 // 矩阵(i, j)位置的元素.
