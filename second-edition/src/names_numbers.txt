@@ -1,0 +1,5 @@
+Computer	4
+World	2
+Data	1
+Earth	3
+Algorithms	0
