@@ -11,8 +11,8 @@ class LEGO {
 public:
   // 构造函数.
   LEGO(size_t n);
-  // 设定已铺平瓦的位置init_spot并求解.
-  void solve(point init_spot);
+  // 设定已铺平瓦的位置singularity并求解.
+  void solve(point singularity);
   // 打印解法.
   void print(int width);
 private:
