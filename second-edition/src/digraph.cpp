@@ -5,9 +5,7 @@
 digraph::digraph(size_t V)
   : AL(V), marked(V), E(0)
 {
-  // 邻接表初始长度为V, 它也是顶点数.
-  // 顶点标记向量初始长度为V.
-  // 边数初值为0.
+  // 邻接表和顶点标记向量的初始长度均设为顶点数V, 边数初值为0.
 }
 
 size_t digraph::vertices_count() const
@@ -28,22 +26,22 @@ bool digraph::is_edge(size_t u, size_t v) const
 
 void digraph::add_edge(size_t u, size_t v)
 {
-  // 增添边是在对应的链中增加顶点.
-  AL[u].push_back(v); // 增添(u, v).
-  ++E;                // 边数加1.
+  // 增添边(u, v)是在链AL[u]中加入顶点v并修改边数, 前提是该边不在图中.
+  AL[u].push_back(v);
+  ++E;
 }
 
 void digraph::remove_edge(size_t u, size_t v)
 {
-  // 删除边(u, v), 前提是该边在图中.
-  AL[u].remove(v);    // 删除(u, v).
-  --E;                // 边数减1.
+  // 删除边(u, v)并修改边数, 前提是该边在图中.
+  AL[u].remove(v);
+  --E;
 }
 
 void digraph::add_vertices(size_t n)
 {
   // 当前顶点编号为0, 1, ... , V - 1.
-  // 增加一个新顶点, 编号设为V, 邻接表和其他信息相应更新.
+  // 增加n个新顶点, 编号从V开始, 邻接表和其他信息也会相应更新.
   AL.resize(AL.size() + n, std::list<size_t>());
   marked.resize(marked.size() + n, false);
 }
@@ -51,6 +49,6 @@ void digraph::add_vertices(size_t n)
 void digraph::visit(size_t v)
 {
   // 此处访问v是直接打印.
-  // 读者可自行修改这个访问顶点函数的功能, 也可令其无任何动作.
-  std::cout << v << " ";
+  // 读者可自行修改顶点访问函数的功能, 也可令其无任何动作.
+  std::cout << v << ' ';
 }
