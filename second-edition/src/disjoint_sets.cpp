@@ -46,6 +46,7 @@ size_t disjoint_sets::find(size_t z)
   // 再进行路径压缩.
   while (z != root)
   {
+    // 使用parent暂存父亲结点.
     size_t parent = D[z].parent;
     D[z].parent = root;
     z = parent;
@@ -77,7 +78,7 @@ void disjoint_sets::print() const
   std::cout << std::endl << std::endl;
 }
 
-void disjoint_sets::clear()
+void disjoint_sets::reset()
 {
   for (size_t i = 0; i < D.size(); ++i)
     D[i] = {i, 0};
