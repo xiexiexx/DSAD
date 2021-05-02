@@ -88,21 +88,22 @@ public:
     // 使用list_const_iterator<T>类所需的默认构造函数,
     // 但使用后面的list<T>::const_iterator类不需要这个.
   }
-
   // 从迭代器到常量迭代器的复制构造函数.
   list_const_iterator(const list_iterator<T>& obj)
   {
     pointer = obj.pointer;
   }
+  // ==运算符.
   bool operator== (const list_const_iterator& rhs) const
   {
     return (pointer == rhs.pointer);
   }
-
+  // !=运算符.
   bool operator!= (const list_const_iterator& rhs) const
   {
     return (pointer != rhs.pointer);
   }
+  // *运算符, 常量版本.
   const T& operator* () const
   {
     return pointer->data;
@@ -162,9 +163,16 @@ public:
   {
     return (position != rhs.position);
   }
-  const T& operator* () const
+  // *运算符.
+  T& operator* ()
   {
     // 得用position的前一位置得到逆向迭代器的实际位置.
+    IR temp = position;
+    return *--temp;
+  }
+  // *运算符, 常量版本.
+  const T& operator* () const
+  {
     IR temp = position;
     return *--temp;
   }
@@ -517,7 +525,7 @@ template <typename T>
 typename doubly_linked_list<T>::const_reverse_iterator
   doubly_linked_list<T>::crbegin() const
 {
-  return reverse_iterator(const_iterator(header));
+  return const_reverse_iterator(const_iterator(header));
 }
 
 // 双循环链的逆向终结位置rend(), 用于逆向迭代器.
@@ -533,7 +541,7 @@ template <typename T>
 typename doubly_linked_list<T>::const_reverse_iterator
   doubly_linked_list<T>::crend() const
 {
-  return reverse_iterator(const_iterator(header->next));
+  return const_reverse_iterator(const_iterator(header->next));
 }
 
 #endif  // DOUBLY_LINKED_LIST_CLASS

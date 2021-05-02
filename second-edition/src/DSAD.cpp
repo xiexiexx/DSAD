@@ -30,8 +30,6 @@ void ChiaHsien_triangle(unsigned int n, int width);
 
 void input_preprocess(std::list<int>& L, int& m);
 
-void print(const std::list<int>& L);
-
 void mean_of_larger(std::list<int>& L, int d, int m);
 
 void treasure_hunting(const std::vector<std::vector<std::string>>& H,
@@ -232,9 +230,17 @@ void demo_dynamic_array()
   for (auto iter = A.begin(); iter != A.end(); ++iter)
     std::cout << *iter << ' ';
   std::cout << std::endl;
+  ++A.front();
+  A.push_back(3);
+  --A.back();
+  A.pop_back();
+  std::cout << (A.front() + A.back()) << std::endl;
+  dynamic_array<int> B;
+  B.swap(A);
+  std::cout << A.size() << std::endl;
   // 注意单独留作哨兵位置.
   A[A.size()] = 3;
-  std::cout << A[A.size()];
+  std::cout << A[A.size()] << std::endl;
 }
 
 // 双链演示.
@@ -245,15 +251,45 @@ void demo_doubly_linked_list()
   L.push_back(2);
   L.push_front(4);
   L.push_front(1);
+  // 利用迭代器对L中所有元素进行自增操作.
   for (auto iter = L.begin(); iter != L.end(); ++iter)
-    std::cout << *iter << ' ';
+    ++*iter;
+  // 以常量迭代器遍历L.
+  for (auto citer = L.cbegin(); citer != L.cend(); ++citer)
+    std::cout << *citer << ' ';
   std::cout << std::endl;
+  // 逆置L.
   L.reverse();
+  // 利用逆向迭代器对L中所有元素进行自减操作.
   for (auto riter = L.rbegin(); riter != L.rend(); ++riter)
-    std::cout << *riter << ' ';
+    --*riter;
+  // 以常量逆向迭代器遍历L.
+  for (auto criter = L.rbegin(); criter != L.rend(); ++criter)
+    std::cout << *criter << ' ';
   std::cout << std::endl;
   auto iter = L.find(2);
-  std::cout << *iter;
+  if (iter != L.end())
+  {
+    iter = L.erase(iter);
+    L.insert(iter, 2);
+  }
+  ++L.front();
+  --L.back();
+  std::cout << (L.front() + L.back()) << std::endl;
+  enum position {front, back};
+  position front_or_back = front;
+  while (!L.empty())
+    if (front_or_back == front)
+    {
+      L.pop_front();
+      front_or_back = back;
+    }
+    else
+    {
+      L.pop_back();
+      front_or_back = front;
+    }
+  std::cout << L.size() << std::endl;
 }
 
 int main()
