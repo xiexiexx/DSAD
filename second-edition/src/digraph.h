@@ -20,10 +20,10 @@ public:
   void remove_edge(size_t u, size_t v);
   // 增添n个顶点, 默认值为1.
   void add_vertices(size_t n = 1);
-  // 深度优先搜索.
-  void DFS(size_t v);
-  // 广度优先搜索.
-  void BFS(size_t v);
+  // 从起点s开始进行深度优先搜索.
+  void DFS(size_t s);
+  // 从起点s开始进行广度优先搜索.
+  void BFS(size_t s);
   // 访问顶点函数.
   void visit(size_t v);
 protected:
