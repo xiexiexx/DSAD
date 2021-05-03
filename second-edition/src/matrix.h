@@ -1,7 +1,7 @@
 #include <vector>
 
-#ifndef VMATRIX
-#define VMATRIX
+#ifndef MATRIX_CLASS
+#define MATRIX_CLASS
 
 template <typename T>
 class matrix {
@@ -56,4 +56,4 @@ const T& matrix<T>::operator()(size_t i, size_t j) const
   return M[i][j];
 }
 
-#endif  // VMATRIX
+#endif  // MATRIX_CLASS

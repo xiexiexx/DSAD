@@ -1,7 +1,7 @@
 #include <vector>
 
-#ifndef DISJOINT_SETS
-#define DISJOINT_SETS
+#ifndef DISJOINT_SETS_CLASS
+#define DISJOINT_SETS_CLASS
 
 // 存储父亲结点以及秩的信息.
 struct information {
@@ -23,4 +23,4 @@ private:
   size_t disjoint_count;          // 维护不相交集个数的计数器.
 };
 
-# endif // DISJOINT_SETS
+#endif // DISJOINT_SETS_CLASS

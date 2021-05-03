@@ -33,4 +33,4 @@ protected:
   void depth_first_search(size_t v);  // 递归DFS访问函数(不对外公开).
 };
 
-# endif // DIGRAPH_CLASS
+#endif  // DIGRAPH_CLASS

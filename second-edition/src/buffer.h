@@ -1,7 +1,7 @@
 #include <vector>
 
-#ifndef BUFFER_H
-#define BUFFER_H
+#ifndef BUFFER_CLASS
+#define BUFFER_CLASS
 
 template <typename T>
 class buffer {
@@ -95,4 +95,4 @@ size_t buffer<T>::capacity() const
   return size;
 }
 
-#endif  // BUFFER_H
+#endif  // BUFFER_CLASS

@@ -33,4 +33,4 @@ inline double timer::time() const
   return std::chrono::duration<double>(e - s).count();
 }
 
-#endif // TIMER_CLASS
+#endif  // TIMER_CLASS

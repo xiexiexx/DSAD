@@ -1,7 +1,7 @@
 #include <utility>  // 包含std::swap.
 
-#ifndef DYNAMIC_ARRAY_H
-#define DYNAMIC_ARRAY_H
+#ifndef DYNAMIC_ARRAY_CLASS
+#define DYNAMIC_ARRAY_CLASS
 
 template <typename T>
 class dynamic_array {
@@ -239,4 +239,4 @@ inline typename dynamic_array<T>::const_iterator
   return (V + array_size);
 }
 
-#endif  // DYNAMIC_ARRAY_H
+#endif  // DYNAMIC_ARRAY_CLASS

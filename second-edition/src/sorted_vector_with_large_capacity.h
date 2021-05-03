@@ -1,8 +1,8 @@
 #include <vector>
 #include <algorithm>
 
-#ifndef SORTEDVECTOR_H
-#define SORTEDVECTOR_H
+#ifndef SORTEDVECTOR_CLASS
+#define SORTEDVECTOR_CLASS
 
 template <typename T>
 class sorted_vector_with_large_capacity {
@@ -105,4 +105,4 @@ size_t sorted_vector_with_large_capacity<T>::
   return data.size();
 }
 
-#endif  // SORTEDVECTOR_H
+#endif  // SORTEDVECTOR_CLASS

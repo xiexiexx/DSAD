@@ -1,8 +1,8 @@
 #include <vector>
 #include <algorithm>
 
-#ifndef UNSORTEDVECTOR_H
-#define UNSORTEDVECTOR_H
+#ifndef UNSORTEDVECTOR_CLASS
+#define UNSORTEDVECTOR_CLASS
 
 template <typename T>
 class unsorted_vector_with_large_capacity {
@@ -103,4 +103,4 @@ size_t unsorted_vector_with_large_capacity<T>::
   return data.size();
 }
 
-#endif  // UNSORTEDVECTOR_H
+#endif  // UNSORTEDVECTOR_CLASS

@@ -1,8 +1,8 @@
 #include <string>
 #include <vector>
 
-#ifndef HUFFMAN_TREE
-#define HUFFMAN_TREE
+#ifndef HUFFMAN_TREE_CLASS
+#define HUFFMAN_TREE_CLASS
 
 // Huffman树结点定义.
 struct hnode {
@@ -46,4 +46,4 @@ private:
   std::vector<hnode> tree;
 };
 
-# endif // HUFFMAN_TREE
+#endif  // HUFFMAN_TREE_CLASS
