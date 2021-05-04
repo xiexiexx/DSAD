@@ -1,4 +1,5 @@
-#include <utility>  // 包含std::swap.
+// 包含std::swap.
+#include <utility>
 
 #ifndef DYNAMIC_ARRAY_CLASS
 #define DYNAMIC_ARRAY_CLASS
@@ -6,17 +7,17 @@
 template <typename T>
 class dynamic_array {
 public:
-  explicit dynamic_array(size_t size = 0, const T& value = T());
+  explicit dynamic_array(size_t n = 0, const T& value = T());
   dynamic_array(const dynamic_array<T>& obj);
   ~dynamic_array();
   void swap(dynamic_array<T>& rhs);
-  dynamic_array& operator= (const dynamic_array<T>& rhs);
+  dynamic_array& operator=(const dynamic_array<T>& rhs);
   T& front();
   const T& front() const;
   T& back();
   const T& back() const;
-  T& operator[] (size_t i);
-  const T& operator[] (size_t i) const;
+  T& operator[](size_t i);
+  const T& operator[](size_t i) const;
   void push_back(const T& item);
   void pop_back();
   size_t size() const;
@@ -24,8 +25,10 @@ public:
   size_t capacity() const;
   void reserve(size_t n);
 
+  // 迭代器实为T*指针.
   using iterator = T*;
   using const_iterator = const T*;
+
   inline iterator begin();
   inline const_iterator cbegin() const;
   inline iterator end();
@@ -33,9 +36,9 @@ public:
 private:
   size_t array_capacity;
   size_t array_size;
-  T* V;
+  T* A;
   void initialize(size_t n);
-  // 有时需要在初始给向量一个恒定正容量, 此处取16.
+  // 为了后续加倍方便, 有时需要初始设置一个恒定的正容量, 此处取16.
   static const size_t POSITIVE_CAPACITY = 16;
 };
 
@@ -43,43 +46,46 @@ private:
 template <typename T>
 void dynamic_array<T>::initialize(size_t n)
 {
-  // 为V新申请内存空间.
-  V = new T[n];
+  // 为A新申请内存空间, 注意未考虑异常处理.
+  A = new T[n];
   array_capacity = n;
 }
 
-// 为满足更大的需求调整向量大小, 但初学者不建议使用.
+// 为了满足后续需求, 提前调整数组容量.
 template <typename T>
 void dynamic_array<T>::reserve(size_t n)
 {
   // n大于现有的array_capacity才生效.
   if (n > array_capacity)
   {
-    T* X = new T[n];  // 新申请内存空间.
+    // 新申请内存空间.
+    T* X = new T[n];
     for(size_t i = 0; i < array_size; ++i)
-      X[i] = V[i];
-    delete[] V;       // 释放原有空间.
-    V = X;            // 让V获得X指向的空间.
+      X[i] = A[i];
+    // 释放原有空间, 并让A获得X指向的空间.
+    delete[] A;
+    A = X;
     array_capacity = n;
   }
 }
 
 // 构造函数的实现.
 template <typename T>
-dynamic_array<T>::dynamic_array(size_t size, const T& value)
-  : array_size(0), V(NULL)
+dynamic_array<T>::dynamic_array(size_t n, const T& value)
+  : array_size(0), A(NULL)
 {
-  // 构造函数只需一次, 因此这种判断无关乎性能. 此外, 注意size不会为负.
-  if (size > 0)
+  // 构造函数只需一次, 因此关于n的判断无关乎性能.
+  // 如果n为0, 则设定容量为POSITIVE_CAPACITY. 注意n不会为负.
+  if (n > 0)
   {
-    // 留出哨兵位置. 假设后续够用, 没有设定2 * size长度的初始容量.
-    initialize(size + 1);
-    array_size = size;
-    // 以构造函数的初值参数value对向量中所有元素赋值.
+    // 留出哨兵位置. 假设后续够用, 所以未将初始容量设成2 * n.
+    initialize(n + 1);
+    array_size = n;
+    // 以构造函数的初值参数value对动态数组中所有元素赋值.
     for (size_t i = 0; i < array_size; ++i)
-      V[i] = value;
+      A[i] = value;
   }
-  else  // 为后续加倍方便, 初始给向量一个恒定正容量.
+  else
     initialize(POSITIVE_CAPACITY);
 }
 
@@ -88,23 +94,24 @@ template <typename T>
 dynamic_array<T>::dynamic_array(const dynamic_array<T>& obj)
   : array_size(obj.array_size)
 {
-  initialize(obj.array_capacity); // 按照obj的容量申请新内存空间.
+  // 按照obj的容量申请新内存空间, 再逐个复制.
+  initialize(obj.array_capacity);
   for (size_t i = 0; i < array_size; ++i)
-    V[i] = obj.V[i];              // 逐个复制.
+    A[i] = obj.A[i];
 }
 
 // 析构函数的实现.
 template <typename T>
 dynamic_array<T>::~dynamic_array()
 {
-  delete[] V;
+  delete[] A;
 }
 
 // 数据交换函数.
 template <typename T>
 void dynamic_array<T>::swap(dynamic_array<T>& rhs)
 {
-  std::swap(this->V, rhs.V);
+  std::swap(this->A, rhs.A);
   std::swap(this->array_capacity, rhs.array_capacity);
   std::swap(this->array_size, rhs.array_size);
 }
@@ -121,122 +128,122 @@ dynamic_array<T>& dynamic_array<T>::
   return *this;
 }
 
-// 返回向量首部.
+// 返回动态数组首元素的引用.
 template <typename T>
 T& dynamic_array<T>::front()
 {
-  return V[0];
+  return A[0];
 }
 
-// 返回向量首部的常量版本.
+// 返回动态数组首元素的常量引用.
 template <typename T>
 const T& dynamic_array<T>::front() const
 {
-  return V[0];
+  return A[0];
 }
 
-// 返回向量末尾.
+// 返回动态数组尾元素的引用.
 template <typename T>
 T& dynamic_array<T>::back()
 {
-  return V[array_size - 1];
+  return A[array_size - 1];
 }
 
-// 返回向量末尾的常量版本.
+// 返回动态数组尾元素的常量引用.
 template <typename T>
 const T& dynamic_array<T>::back() const
 {
-  return V[array_size - 1];
+  return A[array_size - 1];
 }
 
 // 运算符[]的重载实现.
 template <typename T>
-T& dynamic_array<T>::operator[] (size_t i)
+T& dynamic_array<T>::operator[](size_t i)
 {
-  return V[i];
+  return A[i];
 }
 
 // 运算符[]的重载实现的常量版本.
 template <typename T>
-const T& dynamic_array<T>::operator[] (size_t i) const
+const T& dynamic_array<T>::operator[](size_t i) const
 {
-  return V[i];
+  return A[i];
 }
 
-// 在向量末尾添加新元素.
+// 在动态数组末尾添加新元素.
 template <typename T>
 void dynamic_array<T>::push_back(const T& item)
 {
   // 如果容量不够用, 则扩容至现有容量的两倍, 注意留有哨兵位置.
   if (array_size + 1 < array_capacity)
-    V[array_size++] = item;
+    A[array_size++] = item;
   else
   {
-    // 防止item为V中的元素, 提前保存副本.
-    T item_copy = item;
+    // 防止item为A中的元素, 提前保存副本.
+    T temp = item;
     reserve(2 * array_capacity);
-    V[array_size++] = item_copy;
+    A[array_size++] = temp;
   }
 }
 
-// 去除向量的末尾元素.
+// 删除动态数组的尾元素.
 template <typename T>
 void dynamic_array<T>::pop_back()
 {
   --array_size;
 }
 
-// 返回向量的大小.
+// 返回动态数组的大小.
 template <typename T>
 size_t dynamic_array<T>::size() const
 {
   return array_size;
 }
 
-// 判断向量是否为空.
+// 判断动态数组是否为空.
 template <typename T>
 bool dynamic_array<T>::empty() const
 {
   return (array_size == 0);
 }
 
-// 返回向量的当前容量.
+// 返回动态数组的当前容量.
 template <typename T>
 size_t dynamic_array<T>::capacity() const
 {
   return array_capacity;
 }
 
-// 向量的初始位置begin(), 用于迭代器.
+// 动态数组的起始位置begin(), 用于迭代器.
 template <typename T>
 inline typename dynamic_array<T>::iterator
   dynamic_array<T>::begin()
 {
-  return V;
+  return A;
 }
 
-// 向量的初始位置cbegin(), 用于常量迭代器.
+// 动态数组的起始位置cbegin(), 用于常量迭代器.
 template <typename T>
 inline typename dynamic_array<T>::const_iterator
   dynamic_array<T>::cbegin() const
 {
-  return V;
+  return A;
 }
 
-// 向量的初始位置end(), 用于迭代器.
+// 动态数组的终结位置end(), 用于迭代器.
 template <typename T>
 inline typename dynamic_array<T>::iterator
   dynamic_array<T>::end()
 {
-  return (V + array_size);
+  return (A + array_size);
 }
 
-// 向量的初始位置cend(), 用于常量迭代器.
+// 动态数组的终结位置cend(), 用于常量迭代器.
 template <typename T>
 inline typename dynamic_array<T>::const_iterator
   dynamic_array<T>::cend() const
 {
-  return (V + array_size);
+  return (A + array_size);
 }
 
 #endif  // DYNAMIC_ARRAY_CLASS

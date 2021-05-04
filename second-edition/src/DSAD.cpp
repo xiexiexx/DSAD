@@ -44,7 +44,7 @@ void print_all(const C& S)
   std::cout << std::endl;
 }
 
-// 以迭代器区间[left, right)作为参数打印所有元素.
+// 以迭代器区间[left, right)作为参数打印该区间对应的所有元素.
 template <typename IR>
 void print_all(IR left, IR right)
 {
@@ -53,7 +53,7 @@ void print_all(IR left, IR right)
   std::cout << std::endl;
 }
 
-// 演示程序直接在main函数里调用即可.
+// 以下演示程序可直接在main函数中调用.
 
 // 单位矩阵演示.
 void demo_identity_matrix()
@@ -65,17 +65,21 @@ void demo_identity_matrix()
 // Fibonacci序列计算(非常慢).
 void demo_Fibonacci()
 {
+  // 设置计时器t.
   timer t;
+  // 计时开始.
   t.start();
   Fibonacci_sequence(50);
+  // 计时结束.
   t.stop();
+  // 打印时长.
   std::cout << t.time() << std::endl;
 }
 
 // LEGO问题求解.
 void demo_LEGO()
 {
-  // 底板尺寸8 x 8, (5, 2)位置已覆盖.
+  // 底板尺寸为8 x 8, 初始已覆盖(5, 2)位置.
   LEGO L(8);
   L.solve({5, 2});
   // 80字符终端打印可设width为5.
@@ -88,12 +92,14 @@ void demo_buffer()
   size_t n = 10;
   buffer<int> B(n);
   int i = 0;
+  // 若缓冲区未满则持续放入.
   while (!B.full())
   {
     B.push(i++);
     std::cout << B.front() << ' ';
   }
   std::cout << std::endl;
+  // 清空缓冲区.
   while (!B.empty())
   {
     std::cout << B.front() << ' ';
@@ -110,7 +116,7 @@ void demo_ChiaHsien_triangle()
   ChiaHsien_triangle(13, 3);
 }
 
-// 统计量.
+// 统计量问题演示.
 void demo_special_statistic()
 {
   std::list<int> L;
@@ -124,16 +130,16 @@ void demo_special_statistic()
 void demo_multi_treasure_hunting()
 {
   std::vector<std::vector<std::string>> H {
-    {"A", "B"}, {"C", "D"}, {"D", "S", "A", "D"}
+    {"A", "B"}, {"B", "A"}, {"D", "S", "A", "D"}
   };
-  std::vector<std::string> F {"A", "A", "C"};
+  std::vector<std::string> F {"B", "B", "S"};
   treasure_hunting(H, F);
 }
 
 // 不相交集演示.
 void demo_disjoint_sets()
 {
-  // 共7个元素.
+  // 集合中共有7个元素.
   disjoint_sets S(7);
   S.merge(S.find(1), S.find(5));
   S.print();
@@ -147,9 +153,10 @@ void demo_disjoint_sets()
   S.print();
 }
 
-// Huffman编码演示, 英文字母词频.
+// Huffman编码演示.
 void demo_Huffman()
 {
+  // 以英文字母频率作为权值.
   std::vector<double> P {
     0.0721, 0.0240, 0.0394, 0.0372, 0.1224, 0.0272,
     0.0178, 0.0449, 0.0779, 0.0013, 0.0054, 0.0426,
@@ -163,6 +170,7 @@ void demo_Huffman()
   for (size_t i = 0; i < H.size(); ++i)
     std::cout << H.codeword(i) << " <-> "
               << (char)('A' + H.symbol(H.codeword(i))) << std::endl;
+  // 输入错误码字.
   if (H.symbol("012") == H.size())
     std::cout << "Error!" << std::endl;
 }
@@ -170,7 +178,7 @@ void demo_Huffman()
 // 有向图演示.
 void demo_digraph()
 {
-  // 实际上G是一棵树, 注意观察遍历次序.
+  // 实际上G是一棵树(0号顶点为根), 注意观察其遍历次序.
   digraph G(7);
   G.add_edge(0, 1);
   G.add_edge(0, 2);
@@ -202,6 +210,7 @@ void demo_prefixsum()
 {
   std::vector<double> A {3.1, 3.14, 3.141, 3.1415};
   std::vector<double> S(A.size());
+  // 将[A.begin(), A.end())区间的部分和存于以S.begin()为开始的区间内.
   std::partial_sum(A.begin(), A.end(), S.begin());
   print_all(S);
 }
@@ -214,7 +223,7 @@ void demo_shuffle()
   std::random_device rd;
   // 基于knuth_b(以Knuth命名的shuffle_order_engine)的随机数生成器g.
   std::knuth_b g(rd());
-  // n为洗牌次数.
+  // 洗牌n次.
   size_t n = 3;
   for (size_t i = 0; i < n; ++i)
   {
@@ -237,16 +246,16 @@ void demo_dynamic_array()
   std::cout << (A.front() + A.back()) << std::endl;
   dynamic_array<int> B;
   B.swap(A);
-  std::cout << A.size() << std::endl;
-  // 注意单独留作哨兵位置.
-  A[A.size()] = 3;
+  std::cout << A.capacity() << std::endl;
+  // 注意A[A.size()]单独留作哨兵位置.
+  A[A.size()] = B.back() + 1;
   std::cout << A[A.size()] << std::endl;
 }
 
-// 双链演示.
+// 双循环链演示.
 void demo_doubly_linked_list()
 {
-  doubly_linked_list<int> L;
+  doubly_linked_list<int> L(2, 0);
   L.push_back(3);
   L.push_back(2);
   L.push_front(4);
@@ -276,6 +285,7 @@ void demo_doubly_linked_list()
   ++L.front();
   --L.back();
   std::cout << (L.front() + L.back()) << std::endl;
+  // 交替删除首尾元素.
   enum position {front, back};
   position front_or_back = front;
   while (!L.empty())
@@ -294,5 +304,6 @@ void demo_doubly_linked_list()
 
 int main()
 {
+  // 添加演示函数即可.
   return 0;
 }
