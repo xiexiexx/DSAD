@@ -39,7 +39,7 @@ void mean_of_larger(list<int>& L, int d, int m)
   int threshold = m - d;
   // 满足要求的数之总和, 以double型存储便于后续计算.
   double sum = 0;
-  // 满足要求的自然数个数.
+  // 满足要求的自然数个数, 实际上等于最终的L.size()值.
   size_t n = 0;
   // 使用auto定义迭代器iter, 注意可能利用它删除元素,
   // 而删除会改变容器状态, 所以iter是list<int>::iterator型迭代器.
@@ -53,7 +53,7 @@ void mean_of_larger(list<int>& L, int d, int m)
       ++iter;               // 注意后续删除分支不能这样操作.
     }
     else
-      iter = L.erase(iter); // 删除后iter会被赋值到下一元素位置.
+      iter = L.erase(iter); // 删除后iter会被赋值到后一元素位置.
   }
   cout << "The mean of the larger numbers is " << sum / n
        << endl << "Larger numbers: ";
