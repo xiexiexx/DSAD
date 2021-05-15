@@ -6,25 +6,25 @@ template <typename T>
 void merge_forward_list(std::forward_list<T>& F,
   std::forward_list<T>& S)
 {
-  // 定位归并目标位置的迭代器.
+  // 定位归并目标位置的迭代器position.
   auto position = F.before_begin();
-  // 单链F的迭代器iter, 初始位置为F.begin().
-  auto iter = F.begin();
+  // 单链F的迭代器first(也即position的后一位置), 初始位置为F.begin().
+  auto first = F.begin();
   // 注意S中结点只会并入, 所以只需要取链首位置S.begin()即可.
   // 如果F和S都有元素可用于归并则循环继续.
-  while (iter != F.end() && S.begin() != S.end())
+  while (first != F.end() && S.begin() != S.end())
   {
     // 若果F中当前元素较小, 那么F的迭代器前进, 元素不需要变动;
-    // 否则将S的链首元素并入目标位置position,
+    // 否则将S的链首元素并入目标位置position之后,
     // 注意splice_after用的是S.before_begin().
-    if (*iter < S.front())
-      ++iter;
+    if (*first < S.front())
+      ++first;
     else
       F.splice_after(position, S, S.before_begin());
     ++position;   // 目标位置迭代器前进.
   }
-  // 将S中剩余部分(S.before_begin(), S.end())范围元素并入,
-  // 若无元素则F不变, 注意两个迭代器都是开区间的端点.
+  // 将S的剩余部分也即(S.before_begin(), S.end())区间中的元素并入,
+  // 注意两个迭代器都是开区间的端点. 若S已无元素则F不变.
   F.splice_after(position, S, S.before_begin(), S.end());
 }
 
