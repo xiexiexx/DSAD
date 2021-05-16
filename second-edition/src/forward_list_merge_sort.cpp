@@ -28,17 +28,17 @@ void merge_forward_list(std::forward_list<T>& F,
   F.splice_after(position, S, S.before_begin(), S.end());
 }
 
-// 对单链data中的元素进行归并排序.
+// 对单链D中的元素进行归并排序.
 template <typename T>
-void forward_list_merge_sort(std::forward_list<T>& data)
+void forward_list_merge_sort(std::forward_list<T>& D)
 {
   // 包含若干有序单链的单链L.
   std::forward_list<std::forward_list<T>> L;
   size_t n = 0;   // 记录数据个数.
-  // 建立若干单链, 每个单链只含一个data中的元素.
+  // 建立若干单链, 每个单链只含一个D中的元素.
   // 注意position在插入之后被赋值为新插入元素所在的位置.
   auto position = L.before_begin();
-  for (auto iter = data.begin(); iter != data.end(); ++iter)
+  for (auto iter = D.begin(); iter != D.end(); ++iter)
   {
     // 注意*iter与{*iter}的区别, 后者是仅包含*iter这个元素的单链.
     position = L.insert_after(position, {*iter});
@@ -66,16 +66,16 @@ void forward_list_merge_sort(std::forward_list<T>& data)
       --n;
     }
   }
-  // 最后只剩下一个有序单链, 则排序成功, 使用移动语义放回data.
+  // 最后只剩下一个有序单链, 则排序成功, 使用移动语义放回D.
   if (n == 1)
-    data = std::move(L.front());
+    D = std::move(L.front());
 }
 
 int main()
 {
-  std::forward_list<int> L {3, 1, 2, 4, 5};
-  forward_list_merge_sort(L);
-  for (const auto& x : L)
+  std::forward_list<int> D {3, 1, 2, 4, 5};
+  forward_list_merge_sort(D);
+  for (const auto& x : D)
     std::cout << x << ' ';
   std::cout << std::endl;
   return 0;
