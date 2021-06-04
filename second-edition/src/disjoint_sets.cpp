@@ -44,7 +44,7 @@ size_t disjoint_sets::find(size_t z)
   while (D[root].parent != root)
     root = D[root].parent;
   // 再进行路径压缩.
-  while (z != root)
+  while (D[z].parent != root)
   {
     // 使用parent暂存父亲结点.
     size_t parent = D[z].parent;
