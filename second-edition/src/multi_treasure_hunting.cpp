@@ -14,7 +14,7 @@ void treasure_hunting(const vector<vector<string>>& H,
 {
   if (F.empty())
     return;
-  // 存放待找宝物的多重集合S.
+  // 存放待查宝物的多重集合S.
   multiset<string> S;
   // 使用移动语义将宝物逐个转存并插入多重集合S中.
   std::move(F.begin(), F.end(), std::inserter(S, S.end()));
@@ -27,9 +27,9 @@ void treasure_hunting(const vector<vector<string>>& H,
       if (iter != S.end())
       {
         cout << "Find " << *iter << endl;
-        // 在待找宝物清单中删除所找到的宝物.
+        // 在待查宝物清单中删除所找到的宝物.
         iter = S.erase(iter);
-        // 不必再在本山洞中寻找.
+        // 不必再在本山洞中寻找. 也可直接以S.erase(H[i][j])返回值判定.
         break;
       }
     }
