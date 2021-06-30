@@ -186,21 +186,27 @@ void demo_digraph()
   G.add_edge(1, 4);
   G.add_edge(2, 5);
   G.add_edge(2, 6);
+  G.reset_marks();
   G.DFS(0);
   std::cout << std::endl;
+  G.reset_marks();
   G.BFS(0);
   std::cout << std::endl;
   G.add_vertices(2);
   G.add_edge(2, 7);
   G.add_edge(5, 8);
+  G.reset_marks();
   G.DFS(0);
   std::cout << std::endl;
+  G.reset_marks();
   G.BFS(0);
   std::cout << std::endl;
   if (G.is_edge(0, 3))
     G.remove_edge(0, 3);
+  G.reset_marks();
   G.DFS(0);
   std::cout << std::endl;
+  G.reset_marks();
   G.BFS(0);
   std::cout << std::endl;
 }
