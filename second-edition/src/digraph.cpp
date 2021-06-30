@@ -59,3 +59,8 @@ void digraph::reset_marks()
   for (size_t i = 0; i < marked.size(); ++i)
     marked[i] = false;
 }
+
+bool digraph::is_marked(size_t v)
+{
+  return marked[v];
+}

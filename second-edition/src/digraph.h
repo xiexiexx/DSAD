@@ -28,6 +28,8 @@ public:
   void visit(size_t v);
   // 重置所有顶点的标记.
   void reset_marks();
+  // 顶点v是否被标记.
+  bool is_marked(size_t v);
 protected:
   std::vector<std::list<size_t>> AL;  // 邻接表.
   std::vector<bool> marked;           // 顶点标记向量.
