@@ -32,7 +32,6 @@ protected:
   std::vector<std::list<size_t>> AL;  // 邻接表.
   std::vector<bool> marked;           // 顶点标记向量.
   size_t E;                           // 边数.
-  void depth_first_search(size_t v);  // 递归DFS访问函数(不对外公开).
 };
 
 #endif  // DIGRAPH_CLASS
