@@ -27,9 +27,6 @@ int main()
     cerr << "Error!";
     exit(-1);
   }
-  // 将names和IM清空.
-  names.clear();
-  IM.clear();
   // 存储编号数据对的向量P.
   vector<pair<size_t, size_t>> P;
   string u, v;

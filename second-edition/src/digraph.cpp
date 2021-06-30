@@ -42,7 +42,7 @@ void digraph::add_vertices(size_t n)
 {
   // 当前顶点编号为0, 1, ... , V - 1.
   // 增加n个新顶点, 编号从V开始, 邻接表和其他信息也会相应更新.
-  AL.resize(AL.size() + n, std::list<size_t>());
+  AL.resize(AL.size() + n);
   marked.resize(marked.size() + n, false);
 }
 
@@ -51,4 +51,10 @@ void digraph::visit(size_t v)
   // 此处访问v是直接打印.
   // 读者可自行修改顶点访问函数的功能, 也可令其无任何动作.
   std::cout << v << ' ';
+}
+
+void digraph::reset_marks()
+{
+  for (size_t i = 0; i < marked.size(); ++i)
+    marked[i] = false;
 }
