@@ -4,9 +4,6 @@
 
 void digraph::BFS(size_t s)
 {
-  // 所有顶点标记置为未发现.
-  for (size_t i = 0; i < marked.size(); ++i)
-    marked[i] = false;
   std::queue<size_t> Q;
   // 从起点s开始搜索.
   Q.push(s);
