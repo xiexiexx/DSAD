@@ -26,6 +26,8 @@ public:
   void BFS(size_t s);
   // 访问顶点函数.
   void visit(size_t v);
+  // 重置所有顶点的标记.
+  void reset_marks();
 protected:
   std::vector<std::list<size_t>> AL;  // 邻接表.
   std::vector<bool> marked;           // 顶点标记向量.
