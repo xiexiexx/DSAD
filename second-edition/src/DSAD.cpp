@@ -178,7 +178,8 @@ void demo_Huffman()
 // 有向图演示.
 void demo_digraph()
 {
-  // 实际上G是一棵树(0号顶点为根), 注意观察其遍历次序.
+  // 图G可以想象成一棵树(0号顶点为根并将所有边换成无向边),
+  // 注意观察遍历次序并比较树的遍历.
   digraph G(7);
   G.add_edge(0, 1);
   G.add_edge(0, 2);
@@ -203,11 +204,12 @@ void demo_digraph()
   std::cout << std::endl;
   if (G.is_edge(0, 3))
     G.remove_edge(0, 3);
+  // 此时G的形状不再是树, 我们对不同顶点进行搜索.
   G.reset_marks();
   G.DFS(0);
   std::cout << std::endl;
   G.reset_marks();
-  G.BFS(0);
+  G.BFS(3);
   std::cout << std::endl;
 }
 
