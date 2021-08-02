@@ -174,7 +174,7 @@ public:
   // *运算符.
   T& operator*()
   {
-    // 得用position的前一位置得到逆向迭代器的实际位置.
+    // 得用position的前一位置来获取逆向迭代器的实际位置.
     IR temp = position;
     return *--temp;
   }
