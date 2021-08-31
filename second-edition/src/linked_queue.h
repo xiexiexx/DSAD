@@ -14,8 +14,8 @@ public:
   ~linked_queue();
   T& front();
   const T& front() const;
-  void push(const T& item);
-  void pop();
+  void enqueue(const T& item);
+  void dequeue();
   size_t size() const;
   bool empty() const;
 private:
@@ -29,19 +29,19 @@ linked_queue<T>::linked_queue()
   : count(0)
 {
   left = new lnode<T>;
-  left->next = NULL;
   right = left;
 }
 
 template <typename T>
 linked_queue<T>::~linked_queue()
 {
-  while (left != NULL)
+  while (left != right)
   {
     lnode<T>* p = left;
     left = left->next;
     delete p;
   }
+  delete right;
 }
 
 template <typename T>
@@ -57,18 +57,17 @@ const T& linked_queue<T>::front() const
 }
 
 template <typename T>
-void linked_queue<T>::push(const T& item)
+void linked_queue<T>::enqueue(const T& item)
 {
   right->data = item;
   lnode<T>* p = new lnode<T>;
-  p->next = NULL;
   right->next = p;
   right = p;
   ++count;
 }
 
 template <typename T>
-void linked_queue<T>::pop()
+void linked_queue<T>::dequeue()
 {
   lnode<T>* p = left;
   left = left->next;
