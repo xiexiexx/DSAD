@@ -35,7 +35,7 @@ void print(const list<int>& L)
 void mean_of_larger(list<int>& L, int d, int m)
 {
   // 注意空序列时不能调用本函数, 其他情况下的自然数序列均有正确返回值.
-  // 计算阈值, 由于m最大, 只需大于等于阈值即可.
+  // 计算阈值, 由于m最大, 只需考虑单侧边界即可.
   int threshold = m - d;
   // 满足要求的数之总和, 以double型存储便于后续计算.
   double sum = 0;
