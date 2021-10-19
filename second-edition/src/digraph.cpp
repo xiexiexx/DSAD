@@ -55,7 +55,7 @@ void digraph::visit(size_t v)
 
 void digraph::reset_marks()
 {
-  // 搜素图之前得调用此函数.
+  // 搜索图之前得调用此函数.
   for (size_t i = 0; i < marked.size(); ++i)
     marked[i] = false;
 }

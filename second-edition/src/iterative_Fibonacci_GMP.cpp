@@ -7,7 +7,7 @@ int main()
   // F[i]表示Fibonacci序列中下标为i的项.
   // m2, m1, f分别代表F[n - 2], F[n - 1], F[n].
   mpz_t m2, m1, f;
-  // 以字符串形式赋值m2和m1, 分别取10进制的0和1.
+  // 以字符串形式赋值m2和m1, 分别取十进制的0和1.
   mpz_init_set_str(m2, "0", 10);
   mpz_init_set_str(m1, "1", 10);
   // 初始化f(无任何值).
