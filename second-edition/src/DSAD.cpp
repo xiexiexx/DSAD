@@ -58,7 +58,7 @@ void print_all(IR left, IR right)
 // 单位矩阵演示.
 void demo_identity_matrix()
 {
-  // 设置5 x 5单位矩阵并打印.
+  // 设置5阶单位矩阵并打印.
   identity_matrix(5);
 }
 
@@ -79,7 +79,7 @@ void demo_Fibonacci()
 // LEGO问题求解.
 void demo_LEGO()
 {
-  // 底板尺寸为8 x 8, 初始已覆盖(5, 2)位置.
+  // 底板边长为8, 初始已覆盖(5, 2)位置.
   LEGO L(8);
   L.solve({5, 2});
   // 80字符终端打印可设width为5.
