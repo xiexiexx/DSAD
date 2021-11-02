@@ -1,6 +1,8 @@
 #ifndef LINKED_QUEUE_CLASS
 #define LINKED_QUEUE_CLASS
 
+#include <cstddef>
+
 template <typename T>
 struct lnode {
   T data;

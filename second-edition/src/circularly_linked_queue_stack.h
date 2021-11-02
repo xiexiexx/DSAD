@@ -1,6 +1,8 @@
 #ifndef CIRCULARLY_LINKED_QUEUE_STACK_CLASS
 #define CIRCULARLY_LINKED_QUEUE_STACK_CLASS
 
+#include <cstddef>
+
 template <typename T>
 struct lnode {
   T data;
