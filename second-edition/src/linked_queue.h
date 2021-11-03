@@ -1,7 +1,7 @@
 #ifndef LINKED_QUEUE_CLASS
 #define LINKED_QUEUE_CLASS
 
-#include <cstddef>
+#include <memory>
 
 template <typename T>
 struct lnode {
@@ -30,7 +30,7 @@ template <typename T>
 linked_queue<T>::linked_queue()
   : count(0)
 {
-  left = new lnode<T>;
+  left = (lnode<T>*) malloc(sizeof(lnode<T>));
   right = left;
 }
 
@@ -41,9 +41,9 @@ linked_queue<T>::~linked_queue()
   {
     lnode<T>* p = left;
     left = left->next;
-    delete p;
+    free(p);
   }
-  delete right;
+  free(right);
 }
 
 template <typename T>
@@ -61,10 +61,8 @@ const T& linked_queue<T>::front() const
 template <typename T>
 void linked_queue<T>::enqueue(const T& item)
 {
-  right->data = item;
-  lnode<T>* p = new lnode<T>;
-  right->next = p;
-  right = p;
+  *right = {item, (lnode<T>*) malloc(sizeof(lnode<T>))};
+  right = right->next;
   ++count;
 }
 
@@ -73,7 +71,7 @@ void linked_queue<T>::dequeue()
 {
   lnode<T>* p = left;
   left = left->next;
-  delete p;
+  free(p);
   --count;
 }
 
