@@ -13,6 +13,6 @@
 - [样章](/second-edition/sample.pdf)
 - 讲义  
 - [代码](/second-edition/src)
-- 勘误  
+- [勘误](/second-edition/errata.pdf)
 
 ---
