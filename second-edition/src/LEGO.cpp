@@ -20,7 +20,7 @@ void LEGO::DAC(size_t n, point start, point singularity)
     positions[0][1] = {start.x + half - 1, start.y + half};
     positions[1][0] = {start.x + half, start.y + half - 1};
     positions[1][1] = {start.x + half, start.y + half};
-    // 再将中心位置4个点中不需要铺砖的位置为真正的已铺位置.
+    // 再将中心位置4个点中不需要铺砖的位置改为真正的已铺位置.
     size_t p = (singularity.x - start.x) / half;
     size_t q = (singularity.y - start.y) / half;
     positions[p][q] = singularity;
