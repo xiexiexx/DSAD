@@ -92,7 +92,7 @@ bool buffer<T>::full() const
 template <typename T>
 size_t buffer<T>::capacity() const
 {
-  return size;
+  return length;
 }
 
 #endif  // BUFFER_CLASS
