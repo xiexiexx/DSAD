@@ -16,7 +16,6 @@
 #include "digraph.h"
 #include "dynamic_array.h"
 #include "doubly_linked_list.h"
-#include <chrono>
 
 // 函数声明.
 
@@ -49,7 +48,7 @@ template <typename IR>
 void print_all(IR left, IR right)
 {
   while (left != right)
-    std::cout << *++left << ' ';
+    std::cout << *left++ << ' ';
   std::cout << std::endl;
 }
 
