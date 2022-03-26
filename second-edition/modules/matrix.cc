@@ -1,4 +1,4 @@
-﻿export module matrix;
+export module matrix;
 
 import <vector>;
 
@@ -48,7 +48,4 @@ private:
   // 矩阵的列数.
   size_t n_cols;
 };
-ws;
-  // 矩阵的列数.
-  size_t n_cols;
-};
+;

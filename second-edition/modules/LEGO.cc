@@ -58,7 +58,7 @@ private:
       positions[p][q] = singularity;
       // 暂时保存不需要铺砖的位置原有的值.
       size_t temp = baseplate(positions[p][q].x, positions[p][q].y);
-      // 对中心位置进行一次铺砖操作
+      // 对中心位置进行一次铺砖操作.
       baseplate(positions[0][0].x, positions[0][0].y) = label;
       baseplate(positions[0][1].x, positions[0][1].y) = label;
       baseplate(positions[1][0].x, positions[1][0].y) = label;
