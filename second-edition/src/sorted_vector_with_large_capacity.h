@@ -56,8 +56,8 @@ void sorted_vector_with_large_capacity<T>::
   erase(size_t pos)
 {
   // 注意执行erase的前提是size() > 0. 另外, 也可使用向量的erase操作.
-  for (size_t i = pos; i < data.size() - 1; ++i)
-    data[i] = data[i + 1];  // 也可使用移动语义.
+  for (size_t i = pos + 1; i < data.size(); ++i)
+    data[i - 1] = data[i];  // 也可使用移动语义.
   data.pop_back();
 }
 
