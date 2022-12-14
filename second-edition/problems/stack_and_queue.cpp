@@ -29,7 +29,7 @@ int main()
   cout << endl;
   while (!S.empty())
   {
-    cout << S.top() << " ";
+    cout << S.top() << ", ";
     S.pop();
   }
   cout << endl;

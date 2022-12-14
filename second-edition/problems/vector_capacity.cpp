@@ -20,6 +20,6 @@ int main()
   }
   V.push_back(x);
   for (auto iter = V.cbegin(); iter != V.cend(); ++iter)
-    cout << *iter << " ";
+    cout << *iter << "...";
   return 0;
 }
