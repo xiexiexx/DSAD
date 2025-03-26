@@ -43,8 +43,8 @@ template <typename T>
 void sorted_vector_with_large_capacity<T>::
   insert(const T& key)
 {
-  // 可以用线性查找获取合适的迭代器插入位置,
-  // 若找不到合适的位置则意味应插入末尾.
+  // 请注意: 也可以用线性查找获取合适的迭代器插入位置,
+  // 若是找不到合适的位置则意味应插入末尾.
   // 这里采用更好的方案也即二分查找, 注意调用的是upper_bound.
   auto iter = upper_bound(data.begin(), data.end(), key);
   // 直接使用向量的插入功能.
