@@ -43,6 +43,9 @@ template <typename T>
 void unsorted_vector_with_large_capacity<T>::
   insert(const T& key)
 {
+  // 如果集合中已有该元素, 则不进行任何操作.
+  if (find(key) != data.size())
+    return;
   // 在data末尾加入新元素key.
   data.push_back(key);
 }
