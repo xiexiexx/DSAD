@@ -43,6 +43,9 @@ template <typename T>
 void sorted_vector_with_large_capacity<T>::
   insert(const T& key)
 {
+  // 如果集合中已有该元素, 则不进行任何操作.
+  if (find(key) != data.size())
+    return;
   // 请注意: 也可以用线性查找获取合适的迭代器插入位置,
   // 若是找不到合适的位置则意味应插入末尾.
   // 这里采用更好的方案也即二分查找, 注意调用的是upper_bound.
