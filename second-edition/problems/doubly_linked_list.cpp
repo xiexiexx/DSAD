@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-  const int d = 8;
+  const int d = 10;   // 学号共10位(不足10位在前面补0).
   const int w = 3;
   const int MAX = 10;
   vector<int> V(d);

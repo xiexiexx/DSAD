@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-  const size_t d = 8;     // 学号共8位.
+  const size_t d = 10;    // 学号共10位(不足10位在前面补0).
   int x = 7;              // 随意指定.
   vector<int> V;
   V.reserve(3);           // 假定向量初始容量为3.
@@ -16,7 +16,7 @@ int main()
   {
     int num;
     cin >> num;           // 依次输入你的学号, 每次输入1个数字.
-    V.push_back(num * x);
+    V.push_back(num * x + x / (num + 1) - x /(i + 1));
   }
   V.push_back(x);
   for (auto iter = V.cbegin(); iter != V.cend(); ++iter)

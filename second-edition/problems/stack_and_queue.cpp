@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-  const size_t d = 8;       // 学号共8位.
+  const size_t d = 10;      // 学号共10位(不足10位在前面补0).
   int x = 7;                // 随意指定.
   stack<int> S;
   queue<char> Q;
