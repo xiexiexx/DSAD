@@ -8,9 +8,9 @@ int main()
   int x = 7;              // 随意指定.
   vector<int> V;
   V.reserve(3);           // 假定向量初始容量为3.
-  for (size_t i = 0; i < d; ++i)
-    V.push_back(d);
-  for (size_t i = 0; i < d; ++i)
+  for (size_t i = 0; i < d / 2; ++i)
+    V.push_back(d + i + 1);
+  for (size_t i = 2; i < d / 2; ++i)
     V.pop_back();
   for (size_t i = 0; i < d; ++i)
   {
