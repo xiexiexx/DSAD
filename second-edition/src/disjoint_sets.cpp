@@ -80,6 +80,7 @@ void disjoint_sets::print() const
 
 void disjoint_sets::reset()
 {
+  disjoint_count = D.size();
   for (size_t i = 0; i < D.size(); ++i)
     D[i] = {i, 0};
 }
