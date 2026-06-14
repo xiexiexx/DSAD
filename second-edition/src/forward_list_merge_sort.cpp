@@ -14,13 +14,14 @@ void merge_forward_list(std::forward_list<T>& F,
   // 如果F和S都有元素可用于归并则循环继续.
   while (first != F.end() && S.begin() != S.end())
   {
-    // 若果F中当前元素较小, 那么F的迭代器前进, 元素不需要变动;
-    // 否则将S的链首元素并入目标位置position之后,
+    // 如果F中当前元素小于或等于S的链首元素, 那么F的迭代器直接前进即可,
+    // 对应元素不需变动; 否则将S的链首元素并入目标位置position之后,
     // 注意splice_after用的是S.before_begin().
-    if (*first < S.front())
-      ++first;
-    else
+    // 这段代码既要保证后续的排序稳定性, 还要限定仅使用<运算符.
+    if (S.front() < *first)
       F.splice_after(position, S, S.before_begin());
+    else
+      ++first;
     ++position;   // 目标位置迭代器前进.
   }
   // 将S的剩余部分也即(S.before_begin(), S.end())区间中的元素并入,
