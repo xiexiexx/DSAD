@@ -9,19 +9,19 @@ class sorted_vector_with_large_capacity {
 public:
   // 构造函数.
   sorted_vector_with_large_capacity();
-  // 将key放入集合中.
+  // 将key放入有序向量中.
   void insert(const T& key);
-  // 将pos位置所在的元素删除, 前提是集合非空且pos在[0, size())区间内.
+  // 将pos位置对应的元素删除, 前提是向量非空且pos在[0, size())区间内.
   void erase(size_t pos);
-  // 若key在集合中则返回其位置, 否则返回size().
+  // 若key在有序向量中则返回其位置, 否则返回size().
   size_t find(const T& key) const;
-  // 返回集合中最大元素的位置, 若集合为空则返回size().
+  // 返回有序向量中最大元素的位置, 若有序向量为空则返回size().
   size_t maximum_at() const;
-  // 返回集合中最小元素的位置, 若集合为空则返回size().
+  // 返回有序向量中最小元素的位置, 若有序向量为空则返回size().
   size_t minimum_at() const;
   // 返回pos位置元素的常量引用, 注意未提供非常量版本.
   const T& operator()(size_t pos) const;
-  // 返回集合中元素的个数.
+  // 返回有序向量中元素的个数.
   size_t size() const;
 private:
   std::vector<T> data;
@@ -43,10 +43,8 @@ template <typename T>
 void sorted_vector_with_large_capacity<T>::
   insert(const T& key)
 {
-  // 如果集合中已有该元素, 则不进行任何操作.
-  if (find(key) != data.size())
-    return;
-  // 请注意: 也可以用线性查找获取合适的迭代器插入位置,
+  // 若要以有序向量实现集合, 插入前得先确定无重复元素存在.
+  // 另外请注意: 也可以用线性查找获取合适的迭代器插入位置,
   // 若是找不到合适的位置则意味应插入末尾.
   // 这里采用更好的方案也即二分查找, 注意调用的是upper_bound.
   auto iter = upper_bound(data.begin(), data.end(), key);
@@ -82,7 +80,7 @@ template <typename T>
 size_t sorted_vector_with_large_capacity<T>::
   maximum_at() const
 {
-  // 注意集合为空时仍然返回0.
+  // 注意有序向量为空时仍然返回0.
   return data.size() > 0 ? data.size() - 1 : 0;
 }
 
@@ -90,7 +88,7 @@ template <typename T>
 size_t sorted_vector_with_large_capacity<T>::
   minimum_at() const
 {
-  // 注意集合为空时仍然返回0.
+  // 注意有序向量为空时仍然返回0.
   return 0;
 }
 
