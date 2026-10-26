@@ -4,12 +4,13 @@
 #ifndef SORTEDVECTOR_CLASS
 #define SORTEDVECTOR_CLASS
 
+// 有序向量容器.
 template <typename T>
 class sorted_vector_with_large_capacity {
 public:
   // 构造函数.
   sorted_vector_with_large_capacity();
-  // 将key放入有序向量中.
+  // 将key放入有序向量容器中.
   void insert(const T& key);
   // 将pos位置对应的元素删除, 前提是向量非空且pos在[0, size())区间内.
   void erase(size_t pos);
